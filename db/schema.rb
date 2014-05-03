@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140503011412) do
+ActiveRecord::Schema.define(version: 20140503123403) do
 
   create_table "categories", force: true do |t|
     t.string "name", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140503011412) do
     t.string  "abbreviation"
   end
 
-  create_table "journal", force: true do |t|
+  create_table "journal_records", force: true do |t|
     t.integer  "journalable_id"
     t.string   "journalable_type"
     t.integer  "equipment_id",     null: false
@@ -55,13 +55,13 @@ ActiveRecord::Schema.define(version: 20140503011412) do
   end
 
   create_table "repairs", force: true do |t|
-    t.integer "replaced_item_id"
     t.string  "reason"
+    t.integer "spare_id"
   end
 
   create_table "spares", force: true do |t|
     t.string  "name"
-    t.integer "category_id"
+    t.integer "equipment_type_id"
   end
 
 end
