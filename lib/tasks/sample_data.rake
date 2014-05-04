@@ -23,10 +23,6 @@ namespace :db do
     #end
     #
 
-
-
-
-
     ## Create microposts
     #users = User.all().limit(6)
     #50.times do
