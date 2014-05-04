@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
@@ -7,36 +9,69 @@ namespace :db do
     Category.create!(name: "Периферийные устройства")
     Category.create!(name: "Компьютерные аксессуары")
 
-    # Create users
-    #User.create!(name: "Example User",
-    #             email: "example@mail.ru",
-    #             password: "foobar",
-    #             password_confirmation: "foobar")
-    #99.times do |n|
-    #  name = Faker::Name.name
-    #  email = "example-#{n+1}@mail.ru"
-    #  password = "password"
-    #  User.create!(name: name,
-    #               email: email,
-    #               password: password,
-    #               password_confirmation: password)
-    #end
-    #
+    # Create departments
+    10.times do |n|
+      Department.create!(name:                   "#{Faker::Commerce.department} ##{n + 1}",
+                         materially_responsible: Faker::Name.name,
+                         phone_number:           Faker::PhoneNumber.subscriber_number(3)
+      )
+    end
 
-    ## Create microposts
-    #users = User.all().limit(6)
-    #50.times do
-    #  content = Faker::Lorem.sentence(1000)
-    #  title = "Title"
-    #  from = Time.now.to_f
-    #  to = 2.years.from_now.to_f
-    #  created_at = Time.at(from + rand * (to - from))
-    #  users.each do |user|
-    #    micropost = user.microposts.create!(content: content, title: title, created_at: created_at)
-    #    offset = rand(Category.count)
-    #    rand_category = Category.first(:offset => offset)
-    #    micropost.categories << rand_category
-    #  end
-    #end
+    # Create equipment types
+    10.times do |n|
+      EquipmentType.create!(name:         "#{Faker::Commerce.product_name} ##{n}",
+                            category_id:  rand(1..Category.count),
+                            manufacturer: Faker::Company.name,
+                            abbreviation: "ABBA"
+      )
+    end
+
+    # Create equipment types
+    20.times do
+      Equipment.create!(equipment_type_id: rand(1..EquipmentType.count),
+                        department_id:     rand(1..Department.count),
+                        inventory_number:  Faker::Number.number(11)
+      )
+    end
+
+    # Create relocation actions and save it in journal records table
+    30.times do
+      relocation = Relocation.create!(department_id: rand(1..Department.count))
+
+      from = Time.now.to_f
+      to = 3.months.from_now.to_f
+      created_at = Time.at(from + rand * (to - from))
+      relocation.create_journal_record(equipment_id:  rand(1..Equipment.count),
+                                       note:          Faker::Lorem.sentence,
+                                       created_at:    created_at
+      )
+    end
+
+    # Create spares
+    20.times do |n|
+      Spare.create!(name:              "#{Faker::Lorem.word} ##{n}",
+                    equipment_type_id: rand(1..EquipmentType.count)
+      )
+    end
+
+    # Create repair actions and save it in journal records table
+    30.times do
+      repair = Repair.create!(spare_id: rand(1..Spare.count),
+                              reason:   Faker::Lorem.sentence
+      )
+
+      from = Time.now.to_f
+      to = 3.months.from_now.to_f
+      created_at = Time.at(from + rand * (to - from))
+      repair.create_journal_record(equipment_id:  rand(1..Equipment.count),
+                                   note:          Faker::Lorem.sentence,
+                                   created_at:    created_at
+      )
+    end
+
+    # Create users
+    User.create!(email:                 "temain@mail.ru",
+                 password:              "12345678",
+                 password_confirmation: "12345678")
   end
 end

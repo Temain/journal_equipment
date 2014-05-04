@@ -4,5 +4,6 @@ FactoryGirl.define do
     category
     f.manufacturer { Faker::Company.name }
     f.abbreviation "ABBA"
+    #association :category, factory: :category, strategy: :build
   end
 end
