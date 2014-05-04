@@ -26,6 +26,15 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'devise'
+
+gem "haml"
+gem 'haml-rails'
+gem 'haml-contrib'
+#gem 'RedCloth'
+#gem 'bootstrap-sass'
+
+gem 'normalize-rails'
+gem 'bootstrap-sass'
 gem 'annotate'
 
 group :development, :test do

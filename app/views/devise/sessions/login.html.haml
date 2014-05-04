@@ -1,0 +1,25 @@
+
+
+
+
+
+
+.container-fluid.main
+  .row
+    .col-md-12
+      %h1.title Журнал учета оборудования
+  .row.center-row
+    .col-md-4.col-md-offset-4.center
+      #flash-display
+        - flash.each do |type, msg|
+          %div{:class => "alert alert-#{type == :notice ? "success" : type} fadeout", "data-dismiss" => "alert"}
+            %button.close &times;
+            = msg if msg.is_a?(String)
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = f.email_field :email, class: "form-control form-field", placeholder: "Введите имя пользователя...", autofocus: true
+        = f.password_field :password, class: "form-control form-field", placeholder: "Введите пароль...", autocomplete: "off"
+        = f.submit "Войти", class: "btn btn-success sign-in"
+  %footer.row
+    .col-md-12
+      %p © 2014 ФГБОУ ВПО «Кубанский государственный аграрный университет»
+      %address 350044, Россия, г. Краснодар, ул. Калинина, 13

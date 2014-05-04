@@ -32,6 +32,8 @@ GEM
       rake (>= 0.8.7)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
+    bootstrap-sass (3.1.1.1)
+      sass (~> 3.2)
     builder (3.2.2)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -56,6 +58,15 @@ GEM
       railties (>= 3.0.0)
     faker (1.3.0)
       i18n (~> 0.5)
+    haml (4.0.5)
+      tilt
+    haml-contrib (1.0.0.1)
+      haml (>= 3.2.0.alpha.13)
+    haml-rails (0.5.3)
+      actionpack (>= 4.0.1)
+      activesupport (>= 4.0.1)
+      haml (>= 3.1, < 5.0)
+      railties (>= 4.0.1)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (2.0.7)
@@ -71,6 +82,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.3)
     multi_json (1.9.3)
+    normalize-rails (3.0.1)
     orm_adapter (0.5.0)
     polyglot (0.3.4)
     rack (1.5.2)
@@ -147,12 +159,17 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bootstrap-sass
   coffee-rails (~> 4.0.0)
   devise
   factory_girl_rails
   faker
+  haml
+  haml-contrib
+  haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  normalize-rails
   rails (= 4.1.0)
   rspec-rails
   sass-rails (~> 4.0.3)
