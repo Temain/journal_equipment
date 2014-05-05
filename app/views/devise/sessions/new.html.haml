@@ -9,7 +9,7 @@
       %hr.divider
       #flash-display
         - flash.each do |type, msg|
-          %div{:class => "alert alert-dismissable alert-#{type == :notice ? "success" : "danger"}", "data-dismiss" => "alert"}
+          %div{:class => "alert alert-dismissable alert-#{type == "notice" ? "success" : "danger" }", "data-dismiss" => "alert"}
             %button.close &times;
             = msg if msg.is_a?(String)
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|

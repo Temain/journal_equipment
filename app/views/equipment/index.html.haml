@@ -1,0 +1,44 @@
+.container-fluid
+  .header
+    .row
+      .col-md-12
+        .pull-right
+          .menu-item
+            = link_to destroy_user_session_path, method: :delete do
+              %i.glyphicon.glyphicon-log-out Выйти
+    .row
+      .col-md-6.col-md-offset-3.title
+        %h1 Список оборудования
+    .row
+      .col-md-12
+        %nav
+          %ul.navigation
+            - @categories.each_with_index do |c, index|
+              -if index == 0
+                %li.nav-item.active
+                  =link_to c.name, "#"
+              -else
+                %li.nav-item
+                  =link_to c.name, "#"
+
+  .row
+    .col-md-6.col-md-offset-3
+      = form_tag(equipment_index_path, method: :get, class: "search-form") do
+        .input-group
+          %span.input-group-addon.dark
+            %i.glyphicon.glyphicon-search
+          = text_field_tag :search, params[:search], class: "form-control", placeholder: "Введите строку поиска..."
+          %span.input-group-btn
+            = submit_tag "Поиск", class: "btn btn-primary", name: nil
+      .items-container
+        - @equipment.each do |i|
+          .item
+            .name= i.equipment_type.name
+            .manufacturer= i.equipment_type.manufacturer
+            .inventory= i.inventory_number
+            .department= i.department.name
+            - if i.writed_off?
+              .writed_off= Списан
+            .created_at= i.created_at.strftime("%d.%m.%Y")
+
+

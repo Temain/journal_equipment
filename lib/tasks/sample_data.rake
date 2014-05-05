@@ -70,8 +70,8 @@ namespace :db do
     end
 
     # Create users
-    User.create!(email:                 "temain@mail.ru",
-                 password:              "12345678",
-                 password_confirmation: "12345678")
+    #User.create!(email:                 "temain@mail.ru",
+    #             password:              "12345678",
+    #             password_confirmation: "12345678")
   end
 end

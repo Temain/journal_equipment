@@ -35,6 +35,7 @@ gem 'haml-contrib'
 
 gem 'normalize-rails'
 gem 'bootstrap-sass'
+gem "font-awesome-rails"
 gem 'annotate'
 
 group :development, :test do
