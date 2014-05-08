@@ -15,5 +15,6 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap/dropdown
+//= require timeliner
 //= require jquery.mixitup.min
 //= require_tree .
