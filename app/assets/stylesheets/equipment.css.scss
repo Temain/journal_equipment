@@ -108,12 +108,16 @@
       display: inline-block;
       float: right;
 
-      i {
-        padding-left: 5px;
-      }
+      & > a {
+        display: inline-block;
 
-      & > i:hover {
-        color: #ffffff;
+        i {
+          padding-left: 5px;
+        }
+
+        i:hover {
+          color: #ffffff;
+        }
       }
     }
 

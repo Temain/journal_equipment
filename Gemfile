@@ -27,7 +27,7 @@ gem 'spring',        group: :development
 
 gem 'devise'
 
-gem "haml"
+gem 'haml'
 gem 'haml-rails'
 gem 'haml-contrib'
 #gem 'RedCloth'

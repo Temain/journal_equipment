@@ -27,7 +27,7 @@ namespace :db do
     end
 
     # Create equipment types
-    20.times do
+    100.times do
       Equipment.create!(equipment_type_id: rand(1..EquipmentType.count),
                         department_id:     rand(1..Department.count),
                         inventory_number:  Faker::Number.number(11)
@@ -70,8 +70,8 @@ namespace :db do
     end
 
     # Create users
-    #User.create!(email:                 "temain@mail.ru",
-    #             password:              "12345678",
-    #             password_confirmation: "12345678")
+    User.create!(email:                 "temain@mail.ru",
+                 password:              "12345678",
+                 password_confirmation: "12345678")
   end
 end

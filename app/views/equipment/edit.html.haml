@@ -1,0 +1,16 @@
+.container-fluid
+  .header
+    .row.menu
+      .col-md-12
+        .pull-right
+          .menu-item
+            = link_to user_root_path do
+              = fa_icon "user 2x", class: "text-muted", title: "Профиль"
+          .menu-item
+            = link_to destroy_user_session_path, method: :delete do
+              = fa_icon "power-off 2x", class: "text-muted", title: "Выйти"
+    .row
+      .col-md-6.col-md-offset-3
+        %h1.title= "#{@item.equipment_type.name} #{@item.equipment_type.manufacturer}"
+    .row
+      .col-md-12

@@ -55,8 +55,10 @@
             .name= i.equipment_type.name
             .manufacturer= i.equipment_type.manufacturer
             .actions
-              = fa_icon "pencil 2x", class: "text-muted", title: "Редактировать"
-              = fa_icon "trash-o 2x", class: "text-muted", title: "Удалить"
+              = link_to edit_equipment_path(i.id) do
+                = fa_icon "pencil 2x", class: "text-muted", title: "Редактировать"
+              = link_to equipment_path(i.id), method: :delete do
+                = fa_icon "trash-o 2x", class: "text-muted", title: "Удалить"
             .inventory= "Инвентарный номер: #{i.inventory_number}"
             .bottom
               .department= "Подразделение: #{i.department.name}"
