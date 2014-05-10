@@ -33,10 +33,10 @@
                 %span= one_year_records.first
               - one_year_records.last.each_with_index do |event, index|
                 %dl{ class: "timelineMinor" }
-                  %dt{ id:"event#{index + 1}" }
+                  %dt{ id:"event-#{one_year_records.first}#{index + 1}" }
                     %a
                       %strong= Russian::strftime(event.action_date, "%B, %d")
                       #{event.full_text}
-                  %dd{ class: "timelineEvent", id: "event#{index + 1}EX", style: "display: none; " }
+                  %dd{ class: "timelineEvent", id: "event-#{one_year_records.first}#{index + 1}EX", style: "display: none; " }
                     = event_subtext(event)
 

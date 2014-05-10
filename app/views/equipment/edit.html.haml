@@ -11,6 +11,31 @@
               = fa_icon "power-off 2x", class: "text-muted", title: "Выйти"
     .row
       .col-md-6.col-md-offset-3
-        %h1.title= "#{@item.equipment_type.name} #{@item.equipment_type.manufacturer}"
-    .row
-      .col-md-12
+        %h1.title= "#{@item.equipment_type.name} #{@item.manufacturer.name}"
+  .row
+    .col-md-12
+      =form_for(@item, class: "form-horizontal") do |f|
+        %fieldset
+          .form-group
+            = f.label :model, class: "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :model, class: "form-control"
+
+          .form-group
+            = f.label :inventory_number, class: "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :inventory_number, class: "form-control"
+
+          .form-group
+            = f.label :manufacturer_id, class: "col-lg-2 control-label"
+            .col-lg-10
+              = f.select :manufacturer_id, @manufacturers, {}, class: "form-control"
+
+          .form-group
+            = f.label :equipment_type_id, class: "col-lg-2 control-label"
+            .col-lg-10
+              = f.select :equipment_type_id, @equipment_types, {}, class: "form-control"
+
+          .form-group
+            .col-lg-10.col-lg-offset-2
+              = f.submit "Сохранить", class: "btn btn-primary"

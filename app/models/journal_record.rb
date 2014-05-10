@@ -19,18 +19,9 @@ class JournalRecord < ActiveRecord::Base
 
   def full_text
     if journalable.instance_of?(Relocation)
-      "Передан подразделению."
+      "Передан подразделению"
     else
-      "Отправлен в ремонт."
-    end
-  end
-
-  def subtext
-    if journalable.instance_of?(Relocation)
-      "Перемещен из подразделения \"#{journalable.old_department.name}\"
-                  в подразделение \"#{journalable.new_department.name}\""
-    else
-      journalable.spares
+      "Отправлен в ремонт"
     end
   end
 end

@@ -11,6 +11,8 @@ class EquipmentController < ApplicationController
   end
 
   def edit
+    @equipment_types = EquipmentType.all.map { |type| [type.name, type.id] }
+    @manufacturers = Manufacturer.all.map { |manufacturer| [manufacturer.name, manufacturer.id] }
   end
 
   def create
