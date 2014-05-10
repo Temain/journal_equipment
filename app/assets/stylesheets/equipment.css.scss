@@ -23,12 +23,14 @@
   top: 0px;
   background-color: #2b3e50;
   padding: 5px;
+  z-index: 100;
 
   .menu-item {
     display: inline-block;
     padding: 5px;
     & > a > i:hover {
       color: #ffffff;
+      font-size: 3em;
     }
   }
 }

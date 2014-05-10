@@ -2,8 +2,9 @@
 #
 # Table name: relocations
 #
-#  id            :integer          not null, primary key
-#  department_id :integer          not null
+#  id                :integer          not null, primary key
+#  new_department_id :integer          not null
+#  old_department_id :integer
 #
 
 require 'spec_helper'

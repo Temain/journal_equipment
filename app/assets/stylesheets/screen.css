@@ -53,8 +53,9 @@ a img {
 
 p {
 	margin:0 0 10px 8px;
-	font-size:1.5em;
-	font-weight:400;
+	/*font-size:1.5em;
+	font-weight:400;*/
+    font-size:1em;
 	line-height:1.6em;
 }
 
@@ -74,8 +75,9 @@ p {
 .timelineContainer {
     overflow: hidden;
 	border-left:2px solid #ccc;
-	margin:20px auto;
-	width:900px;
+	/*margin:20px auto;
+	width:900px;*/
+    padding-top: 25px;
 }
 
 div.timelineToggle {
@@ -111,7 +113,7 @@ div.timelineMajor {
 		background:url(../assets/timeline_century_tick.gif) left center no-repeat;
 		font-family:Palatino,"Times New Roman", Times, serif;
 		cursor: pointer;
-		font-size:3em;
+		font-size:2em;
 		font-weight:400;
 		margin:0 0 10px;
 		padding:4px 4px 4px 20px;
@@ -122,7 +124,7 @@ div.timelineMajor {
 		-webkit-border-radius:4px;
 		-moz-border-radius:4px;
 		border-radius:4px;
-		color:#131313;
+        color:#2b3e50;
 		letter-spacing:.1em;
 		line-height:1.7em;
 		padding:3px 5px 1px;
@@ -140,12 +142,13 @@ dl.timelineMinor {
 	.timelineMinor dt {
 		background:url(../assets/timeline_decade_tick.gif) left center no-repeat;
 		clear:left;
-		font-size:1.6em;
+		font-size:1em;
+        font-weight: normal;
 		list-style-type:none;
 		line-height:1.2em;
 		margin:0 0 12px;
 		padding:0 0 0 24px;
-		white-space:nowrap;
+		/*white-space:nowrap;*/
 	}
 
 		.timelineMinor dt a {
@@ -155,16 +158,19 @@ dl.timelineMinor {
 
 		.timelineMinor dt a.closed {
 			color:#999;
-			font-size:1em;
+			font-size:0.8em;
 			margin-left:0;
 		}
 
 		.timelineMinor dt a.open {
-			color:#7DBADF;
+			/*color:#7DBADF;*/
+            color: #ffffff;
 		}
 
 		.timelineMinor dt a:hover {
-			color:#7DBADF;
+			/*color:#7DBADF;*/
+            color: #ffffff;
+            text-decoration: none;
 		}
 
 	.timelineMinor dd {
@@ -185,7 +191,7 @@ dl.timelineMinor {
 	clear:left;
 	float:left;
 	line-height:1.5em;
-	margin:6px 0 10px;
+	margin: 6px 0 20px 50px;
 	width:500px;
 }
 

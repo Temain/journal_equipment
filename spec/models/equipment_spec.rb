@@ -9,6 +9,8 @@
 #  writed_off        :boolean          default(FALSE)
 #  created_at        :datetime
 #  updated_at        :datetime
+#  manufacturer_id   :integer
+#  model             :string(255)
 #
 
 require 'spec_helper'

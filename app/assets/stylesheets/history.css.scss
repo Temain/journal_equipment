@@ -1,3 +1,48 @@
 // Place all the styles related to the History controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.history {
+  background-color: #2b3e50;
+  .menu {
+    background-color: #4e5d6c;
+    .text-muted {
+      color: #2b3e50;
+    }
+  }
+
+  .back {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    background-color: #4e5d6c;
+    padding: 5px;
+    z-index: 100;
+
+    .text-muted {
+      color: #2b3e50;
+    }
+
+    .menu-item {
+      display: inline-block;
+      padding: 5px;
+      & > a > i:hover {
+        color: #ffffff;
+        font-size: 3em;
+      }
+    }
+  }
+
+  .header {
+    background-color: #4e5d6c;
+    border-bottom: 1px solid #FF6803;
+
+    .title {
+      border-left:2px solid #ccc;
+      margin: 0px;
+      padding: 20px 0 20px 20px;
+      text-align: left;
+      font-size: 2em;
+    }
+  }
+}

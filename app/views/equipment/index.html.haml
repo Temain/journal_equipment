@@ -1,7 +1,7 @@
 .container-fluid
   .header
     .row.menu
-      .col-md-12
+      .col-md-12.col-xs-12
         .pull-right
           .menu-item
             = link_to user_root_path do
@@ -50,15 +50,16 @@
 
       -#=button_tag "Filter", class: "filter", data: { filter: ".category-0" }
       #Container
-        - @equipment.each_with_index do |i, index|
+        - @equipment.each do |i|
           = content_tag :div, class: "item mix category-#{i.equipment_type.category.id - 1}" do
-            .name= i.equipment_type.name
-            .manufacturer= i.equipment_type.manufacturer
             .actions
               = link_to edit_equipment_path(i.id) do
                 = fa_icon "pencil 2x", class: "text-muted", title: "Редактировать"
+              = link_to history_path(i.id), method: :get do
+                = fa_icon "clock-o 2x", class: "text-muted", title: "История"
               = link_to equipment_path(i.id), method: :delete do
                 = fa_icon "trash-o 2x", class: "text-muted", title: "Удалить"
+            .name= i.full_name
             .inventory= "Инвентарный номер: #{i.inventory_number}"
             .bottom
               .department= "Подразделение: #{i.department.name}"

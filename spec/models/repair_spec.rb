@@ -2,9 +2,8 @@
 #
 # Table name: repairs
 #
-#  id               :integer          not null, primary key
-#  replaced_item_id :integer
-#  reason           :string(255)
+#  id     :integer          not null, primary key
+#  reason :string(255)
 #
 
 require 'spec_helper'

@@ -2,9 +2,9 @@
 #
 # Table name: spares
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  category_id :integer
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  equipment_type_id :integer
 #
 
 require 'spec_helper'

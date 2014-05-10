@@ -37,6 +37,7 @@ gem 'normalize-rails'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'annotate'
+gem 'russian'
 
 group :development, :test do
   gem 'rspec-rails'

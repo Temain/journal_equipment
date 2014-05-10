@@ -11,18 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140503142259) do
+ActiveRecord::Schema.define(version: 20140509150447) do
 
   create_table "categories", force: true do |t|
     t.string "name", null: false
   end
 
   create_table "departments", force: true do |t|
-    t.string   "name",                   null: false
-    t.string   "materially_responsible"
-    t.integer  "phone_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name",                   null: false
+    t.string  "materially_responsible"
+    t.integer "phone_number"
   end
 
   create_table "equipment", force: true do |t|
@@ -32,30 +30,39 @@ ActiveRecord::Schema.define(version: 20140503142259) do
     t.boolean  "writed_off",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "manufacturer_id"
+    t.string   "model"
   end
 
   create_table "equipment_types", force: true do |t|
-    t.string  "name",         null: false
-    t.integer "category_id",  null: false
-    t.string  "manufacturer", null: false
-    t.string  "abbreviation"
+    t.string  "name",        null: false
+    t.integer "category_id", null: false
   end
 
   create_table "journal_records", force: true do |t|
     t.integer  "journalable_id"
     t.string   "journalable_type"
     t.integer  "equipment_id",     null: false
-    t.string   "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.datetime "action_date"
+  end
+
+  create_table "manufacturers", force: true do |t|
+    t.string "name",         null: false
+    t.string "abbreviation"
   end
 
   create_table "relocations", force: true do |t|
-    t.integer "department_id", null: false
+    t.integer "new_department_id", null: false
+    t.integer "old_department_id"
   end
 
   create_table "repairs", force: true do |t|
-    t.string  "reason"
+    t.string "reason"
+  end
+
+  create_table "repairs_spares", id: false, force: true do |t|
+    t.integer "repair_id"
     t.integer "spare_id"
   end
 

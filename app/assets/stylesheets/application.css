@@ -13,7 +13,6 @@
  *= require_self
  *= require normalize-rails
  *= require screen
- *= require responsive
  *= require bootstrap.min
  *= require font-awesome
  *= require_tree .
