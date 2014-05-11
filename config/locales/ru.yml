@@ -1,4 +1,12 @@
 ru:
+  activerecord:
+    models:
+      equipment: Оборудование
+    attributes:
+      equipment:
+        model: "'Модель'"
+        inventory_number: "'Инвентарный номер'"
+      # will translate User attribute "login" as "Handle"
   date:
     formats:
       # Use the strftime parameters for formats.

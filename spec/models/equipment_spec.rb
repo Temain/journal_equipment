@@ -25,4 +25,9 @@ describe Equipment do
   it "should has writed off FALSE by default" do
     equipment.writed_off == false
   end
+
+  it "not valid when inventory number longer than 12 digits" do
+    equipment.inventory_number = '1234567891011121314';
+    equipment.should_not be_valid
+  end
 end

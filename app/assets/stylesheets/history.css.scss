@@ -12,24 +12,9 @@
   }
 
   .back {
-    position: fixed;
-    left: 0px;
-    top: 0px;
     background-color: #4e5d6c;
-    padding: 5px;
-    z-index: 100;
-
     .text-muted {
       color: #2b3e50;
-    }
-
-    .menu-item {
-      display: inline-block;
-      padding: 5px;
-      & > a > i:hover {
-        color: #ffffff;
-        font-size: 3em;
-      }
     }
   }
 

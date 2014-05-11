@@ -16,16 +16,20 @@
       .col-md-12
         %nav
           %ul.navigation
+            %li.nav-item.active
+              = button_tag "Все", class: "filter link", data: { filter: "all" }
             - @categories.each_with_index do |c, index|
-              - if index == 0
-                %li.nav-item.active
-                  = button_tag c.name, class: "filter link", data: { filter: ".category-#{index}" }
-              -else
-                %li.nav-item
-                  = button_tag c.name, class: "filter link", data: { filter: ".category-#{index}" }
+              %li.nav-item
+                = button_tag c.name, class: "filter link", data: { filter: ".category-#{index}" }
 
   .row
     .col-md-6.col-md-offset-3
+      #flash-display
+        - flash.each do |type, msg|
+          %div{:class => "alert alert-dismissable alert-#{type == "notice" ? "success" : "danger" }", "data-dismiss" => "alert"}
+            %button.close &times;
+            = msg if msg.is_a?(String)
+
       = form_tag(equipment_index_path, method: :get, class: "search-form") do
         .input-group
           %span.input-group-addon.dark
@@ -54,11 +58,11 @@
           = content_tag :div, class: "item mix category-#{i.equipment_type.category.id - 1}" do
             .actions
               = link_to edit_equipment_path(i.id) do
-                = fa_icon "pencil 2x", class: "text-muted", title: "Редактировать"
+                = fa_icon "pencil", class: "text-muted", title: "Редактировать"
               = link_to history_path(i.id), method: :get do
-                = fa_icon "clock-o 2x", class: "text-muted", title: "История"
+                = fa_icon "clock-o", class: "text-muted", title: "История"
               = link_to equipment_path(i.id), method: :delete do
-                = fa_icon "trash-o 2x", class: "text-muted", title: "Удалить"
+                = fa_icon "trash-o", class: "text-muted", title: "Удалить"
             .name= i.full_name
             .inventory= "Инвентарный номер: #{i.inventory_number}"
             .bottom

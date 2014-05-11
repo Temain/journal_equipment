@@ -19,8 +19,20 @@ class Equipment < ActiveRecord::Base
   belongs_to :manufacturer
   has_many   :journal_records
 
+  validates :model, presence: true
+  validates :inventory_number, length: { maximum: 12 }
 
-    def full_name
-      "#{equipment_type.name} #{manufacturer.name} #{model}"
+  def full_name
+    "#{equipment_type.name} #{manufacturer.name} #{model}"
+  end
+
+  private
+
+    def self.search(search)
+      if search
+        where(['model LIKE ?', "%#{ search }%"])
+      else
+        all
+      end
     end
 end

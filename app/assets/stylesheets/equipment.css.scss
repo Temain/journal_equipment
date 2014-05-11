@@ -5,33 +5,13 @@
 .header {
   background-color: #2b3e50;
   margin: 0px 0px 20px;
+  /*border-bottom: 1px solid #FF6803;*/
+
   .title{
     font-weight: 400;
     text-align: center;
     margin-bottom: 20px;
     margin-top: 20px;
-  }
-}
-
-.input-group-addon.dark{
-  background-color: #2b3e50;
-}
-
-.menu {
-  position: fixed;
-  right: 0px;
-  top: 0px;
-  background-color: #2b3e50;
-  padding: 5px;
-  z-index: 100;
-
-  .menu-item {
-    display: inline-block;
-    padding: 5px;
-    & > a > i:hover {
-      color: #ffffff;
-      font-size: 3em;
-    }
   }
 }
 
@@ -85,6 +65,10 @@
     border-bottom: 2px solid #4e5d6c;
     width: 100%;
 
+    i {
+      font-size: 1.5em;
+    }
+
     &:hover {
       border: 1px solid #df691a;
       box-shadow: 0 0 5px rgb(255, 92, 2);
@@ -94,12 +78,12 @@
     }
 
     .name {
-      font-size: 1.5em;
+      font-size: 1.2em;
       display: inline;
     }
 
     .inventory {
-
+      font-size: 0.8em;
     }
 
     .manufacturer {
@@ -125,6 +109,7 @@
 
     .bottom {
       .department {
+        font-size: 0.8em;
       }
 
       .created_at{
@@ -132,5 +117,39 @@
         font-size: 0.7em;
       }
     }
+  }
+}
+
+/* ----------- edit and new form ------------ */
+.form-horizontal {
+  background-color: #2b3e50;
+  padding: 20px 30px 20px;
+
+  legend {
+    border-bottom: 1px solid #FF6803;
+  }
+
+  .twitter-typeahead {
+    width: 100%;
+  }
+}
+
+/* Override Rail's default error calls with Bootstrap 3 */
+.field_with_errors {
+  /*border: 1px solid #df1214;
+  box-shadow: 0 0 5px rgb(255, 31, 28);
+  -webkit-box-shadow: 0 0 5px rgb(255, 31, 28);
+  -moz-box-shadow: 0 0 5px rgb(255, 31, 28);*/
+}
+
+.search-field {
+  margin-bottom: 30px;
+  i {
+    z-index: 100;
+    color: black;
+  }
+
+  input {
+    padding-left: 30px;
   }
 }

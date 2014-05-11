@@ -10,4 +10,14 @@
 class Manufacturer < ActiveRecord::Base
   has_many :equipments
   validates :name, presence: true, uniqueness: true
+
+  private
+
+  def self.search(search)
+    if search
+      where(['name LIKE ?', "%#{ search }%"])
+    else
+      all
+    end
+  end
 end

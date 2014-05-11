@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get 'persons/profile', as: 'user_root'
   get 'history/:id' => 'history#show', as: 'history'
 
+  get 'load_manufacturers' =>  'equipment#load_manufacturers', as: 'manufacturers'
+  get 'load_equipment' =>  'equipment#load_equipment', as: 'load_equipment'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

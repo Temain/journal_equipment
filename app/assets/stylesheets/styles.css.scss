@@ -1,10 +1,3 @@
-
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('/assets/fonts/glyphicons-halflings-regular.eot');
-  src: url('/assets/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/assets/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
-}
-
 .container-fluid {
   padding: 0px !important;
 }
@@ -25,7 +18,38 @@ input[type="password"]:focus {
 body {
   background-color: #4e5d6c;
 
-  & > .main {
+  .menu-base {
+    position: fixed;
+    background-color: #2b3e50;
+    padding: 5px;
+    z-index: 100;
+
+    .menu-item {
+      display: inline-block;
+      padding: 5px;
+      & > a > i:hover {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .menu {
+    @extend .menu-base;
+    right: 0px;
+    top: 0px;
+  }
+
+  .back {
+    @extend .menu-base;
+    left: 0px;
+    top: 0px;
+
+    .text-muted {
+      color: #4e5d6c;
+    }
+  }
+
+  .main {
     max-height: 100%;
     max-width: 100%;
     margin-bottom: -20px;
@@ -87,9 +111,30 @@ body {
   }
 }
 
+.input-group-addon.dark {
+  background-color: #2b3e50;
+}
+
+.input-group-addon.light {
+  background-color: #4e5d6c;
+}
+
 .alert {
   box-shadow: none;
   background-image: none;
+}
+
+/* -------- icon in input field --------- */
+.left-inner-addon {
+  position: relative;
+}
+.left-inner-addon > input {
+  padding-left: 30px;
+}
+.left-inner-addon i {
+  position: absolute;
+  padding: 10px 12px;
+  pointer-events: none;
 }
 
 //footer {
