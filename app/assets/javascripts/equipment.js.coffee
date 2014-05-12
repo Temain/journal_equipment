@@ -54,13 +54,20 @@ ready = ->
     $('#equipment_equipment_type_id').val(equipment.equipment_type.id);
   )
 
-
+  # get modal invoker
+  $('#relocation_modal').on('show.bs.modal',(e) ->
+    invoker = $(e.relatedTarget);
+    item_id = invoker[0].attributes.id.value;
+    $('#relocation_modal form').attr('action', '/equipment/'+ item_id + '/relocation');
+    $('#new_department_id_').val(null)
+  )
 
   # prevent form submit on enter
-  $(window).keydown ->
+  $('#remote .typeahead').keydown ->
     if(event.keyCode == 13)
       event.preventDefault();
       return false;
+
 
 
 $(document).ready(ready)

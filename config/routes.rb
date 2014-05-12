@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   devise_for :users
   get 'persons/profile', as: 'user_root'
   get 'history/:id' => 'history#show', as: 'history'
+  get 'repair/:id' =>  'equipment#repair', as: 'repair'
+  post 'equipment/:id/relocation' => 'equipment#relocation', as: 'relocation'
 
+  # returning JSON for typeaheads
   get 'load_manufacturers' =>  'equipment#load_manufacturers', as: 'manufacturers'
   get 'load_equipment' =>  'equipment#load_equipment', as: 'load_equipment'
 

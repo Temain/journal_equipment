@@ -59,10 +59,16 @@
       -#      = link_to "dropdown", "#"
 
       -#=button_tag "Filter", class: "filter", data: { filter: ".category-0" }
+      = render partial: 'relocation'
+
       #Container
         - @equipment.each do |i|
           = content_tag :div, class: "item mix category-#{i.equipment_type.category.id - 1}" do
             .actions
+              = link_to 'javascript:;', class: "repair-link" do
+                = fa_icon "wrench", class: "text-muted", title: "В ремонт", "data-toggle" => "modal", "data-target" => "#repair_modal"
+              = link_to 'javascript:;' do
+                = fa_icon "exchange", class: "text-muted", title: "Переместить", "data-toggle" => "modal", "data-target" => "#relocation_modal", id: i.id
               = link_to edit_equipment_path(i.id) do
                 = fa_icon "pencil", class: "text-muted", title: "Редактировать"
               = link_to history_path(i.id), method: :get do

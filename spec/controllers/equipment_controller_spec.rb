@@ -18,4 +18,7 @@ describe EquipmentController do
       expect(response).to render_template("index")
     end
   end
+
+  describe "GET relocation" do
+  end
 end
