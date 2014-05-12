@@ -184,6 +184,67 @@ body {
 //  right:0;
 //}
 
+
+/* ------------ on click menu ------------------ */
+.onclick-menu {
+  position: relative;
+  display: inline-block;
+
+  ul, ol {
+    padding-left: 2em;
+    list-style: none;
+  }
+}
+.onclick-menu:before {
+  content: "click me!";
+  padding: 5px 10px;
+}
+.onclick-menu:focus {
+  /* clicking on label should toggle the menu */
+  pointer-events: none;
+}
+.onclick-menu:hover .onclick-menu-content {
+  /*  opacity is 1 in opened state (see below) */
+  opacity: 1;
+  visibility: visible;
+
+  /* don't let pointer-events affect descendant elements */
+  pointer-events: auto;
+}
+.onclick-menu-content {
+  background-color: #364656;
+  width: auto;
+
+  margin-top: 10px;
+  margin-left: 0;
+  padding: 10px;
+
+  pointer-events: auto;
+  position: absolute;
+  z-index: 1;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0.5s;
+  -moz-transition: visibility 0.5s;
+  -webkit-transition: visibility 0.5s;
+  -o-transition: visibility 0.5s;
+
+  &:before {
+    content: "";
+    width: 0;
+    height: 0;
+
+    border-bottom: 10px solid #364656;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+
+    position: absolute;
+    top: -10px;
+  }
+}
+
+
 /* text fields placeholder */
 ::-webkit-input-placeholder { color: #8b8b8b !important; }
 ::-moz-placeholder { color: #8b8b8b !important; } /* firefox 19+ */

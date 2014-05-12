@@ -75,6 +75,16 @@
                 = fa_icon "clock-o", class: "text-muted", title: "История"
               = link_to equipment_path(i.id), method: :delete do
                 = fa_icon "trash-o", class: "text-muted", title: "Удалить"
+              = link_to 'javascript:;', class: "actions-link" do
+                = fa_icon "bars", class: "text-muted", title: "Действия"
+
+
+            -#.onclick-menu
+            -#  %ul.onclick-menu-content
+            -#    %li Look, mom
+            -#    %li no JavaScript!
+            -#    %li Pretty nice, right?
+
             .name= i.full_name
             .inventory= "Инвентарный номер: #{i.inventory_number}"
             .bottom

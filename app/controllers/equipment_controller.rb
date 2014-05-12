@@ -1,7 +1,7 @@
 class EquipmentController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item,  only: [:edit, :update, :destroy, :repair, :relocation]
-  before_action :load_departments, only: [:index, :new, :edit, :create, :update]
+  before_action :load_departments, only: [:index, :new, :edit, :create, :update, :relocation]
   before_action :load_equipment_types, only: [:new, :edit, :create, :update]
 
   def index
@@ -55,15 +55,17 @@ class EquipmentController < ApplicationController
   end
 
   def relocation
-    new_department = Department.find(params[:new_department_id]).first
-    relocation = Relocation.new(old_department_id: @item.department_id, new_department_id: new_department.id)
-    relocation.create_journal_record(equipment_id: @item.id, user_id: current_user.id, action_date: Time.now)
-    @item.department = new_department
-    if relocation.save && @item.save
-      flash[:notice] = "#{@item.full_name} успешно перемешен в подразделение #{new_department.name}"
-      #redirect_to controller: :history , action: :show, id: @item.id
-      redirect_to equipment_index_path
-      #render action: :relocation
+    unless params[:new_department_id].first.blank?
+      new_department = Department.find(params[:new_department_id]).first
+      relocation = Relocation.new(old_department_id: @item.department_id, new_department_id: new_department.id)
+      relocation.create_journal_record(equipment_id: @item.id, user_id: current_user.id, action_date: Time.now)
+      @item.department = new_department
+      if relocation.save && @item.save
+        flash[:notice] = "#{@item.full_name} успешно перемешен в подразделение #{new_department.name}"
+        redirect_to equipment_index_path
+      end
+    else
+      flash[:danger] = "Пожалуйста, выберите подразделение."
     end
   end
 

@@ -19,6 +19,6 @@ describe EquipmentController do
     end
   end
 
-  describe "GET relocation" do
+  describe "POST relocation" do
   end
 end
