@@ -22,6 +22,10 @@ class Equipment < ActiveRecord::Base
   validates :model, presence: true
   validates :inventory_number, length: { maximum: 12 }
 
+  validates :department, presence: true
+  validates :equipment_type, presence: true
+  validates :manufacturer, presence: true
+
   def full_name
     "#{equipment_type.name} #{manufacturer.name} #{model}"
   end
@@ -30,9 +34,17 @@ class Equipment < ActiveRecord::Base
 
     def self.search(search)
       if search
-        where(['model LIKE ?', "%#{ search }%"])
+        joins(:manufacturer).where("model LIKE ? OR inventory_number LIKE ? OR manufacturers.name LIKE ?", "%#{search}%","%#{search}%","%#{search}%")
       else
         all
       end
     end
+
+  def self.search_for_create(search)
+    if search
+      joins(:equipment_type).joins(:manufacturer).where("model LIKE ? OR equipment_types.name LIKE ? OR manufacturers.name LIKE ?", "%#{search}%","%#{search}%","%#{search}%")
+    else
+      all
+    end
+  end
 end

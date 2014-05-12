@@ -17,4 +17,5 @@
 //= require bootstrap/dropdown
 //= require timeliner
 //= require jquery.mixitup.min
+//= require typeahead.jquery.min
 //= require_tree .

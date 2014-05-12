@@ -1,6 +1,6 @@
 class EquipmentController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item,  only: [:show, :edit, :update, :destroy]
+  before_action :set_item,  only: [:edit, :update, :destroy]
   before_action :load_dictionaries, only: [:new, :edit, :create, :update]
 
   def index
@@ -14,24 +14,30 @@ class EquipmentController < ApplicationController
   def new
     @item = Equipment.new
     @item.manufacturer = Manufacturer.new
-    @departments = Department.all.map { |department| [department.name, department.id] }
   end
 
   def edit
   end
 
   def create
-    if @item.save(equipment_params)
+    @item = Equipment.new(equipment_params)
+    @manufacturer = Manufacturer.find_or_create_by(name: params[:manufacturer][:name])
+    @item.manufacturer = @manufacturer
+    if @item.save
       flash[:notice] = "Оборудование успешно добавлено."
       redirect_to action: :index
     else
-      render action: :edit
+      render action: :new
     end
   end
 
   def update
     @manufacturer = Manufacturer.find_or_create_by(name: params[:manufacturer][:name])
-    @item.manufacturer = @manufacturer
+    if !@manufacturer.name.empty? && @manufacturer.new_record?
+      @manufacturer.save
+      @item.manufacturer = @manufacturer
+    end
+
     if @item.update(equipment_params)
       flash[:notice] = "Изменения успешно сохранены."
       redirect_to action: :index
@@ -54,9 +60,9 @@ class EquipmentController < ApplicationController
 
   def load_equipment
     if request.xhr?
-      @equipment = Equipment.search(params[:query])
+      @equipment = Equipment.search_for_create(params[:query])
       respond_to do |format|
-        format.json { render json: @equipment }
+        format.json { render json: @equipment, include: [:manufacturer, :equipment_type] }
       end
     end
   end
@@ -70,7 +76,7 @@ class EquipmentController < ApplicationController
 
     def load_dictionaries
       @equipment_types = EquipmentType.all.map { |type| [type.name, type.id] }
-      @manufacturers = Manufacturer.all.map { |manufacturer| [manufacturer.name, manufacturer.id] }
+      @departments = Department.all.map { |department| [department.name, department.id] }
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

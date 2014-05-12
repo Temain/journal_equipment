@@ -11,6 +11,8 @@ class Manufacturer < ActiveRecord::Base
   has_many :equipments
   validates :name, presence: true, uniqueness: true
 
+  default_scope -> { order('name ASC') }
+
   private
 
   def self.search(search)

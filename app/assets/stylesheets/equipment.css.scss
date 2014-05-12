@@ -153,3 +153,38 @@
     padding-left: 30px;
   }
 }
+
+
+.edit {
+  background-color: #2b3e50;
+  .menu {
+    background-color: #4e5d6c;
+    .text-muted {
+      color: #2b3e50;
+    }
+  }
+
+  .back {
+    background-color: #4e5d6c;
+    .text-muted {
+      color: #2b3e50;
+    }
+  }
+
+  .header {
+    background-color: #4e5d6c;
+    border-bottom: 1px solid #FF6803;
+
+    .title {
+      /*border-left:2px solid #ccc;*/
+      margin: 0px;
+      padding: 20px 0 20px 20px;
+      text-align: center;
+      font-size: 2.5em;
+    }
+  }
+
+  .content {
+    border-bottom: 1px solid #FF6803;
+  }
+}

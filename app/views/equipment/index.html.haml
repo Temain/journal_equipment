@@ -4,14 +4,20 @@
       .col-md-12.col-xs-12
         .pull-right
           .menu-item
+            = link_to new_equipment_path, method: :get do
+              = fa_icon "plus-square 2x", class: "text-muted", title: "Добавить оборудование"
+          .menu-item
             = link_to user_root_path do
               = fa_icon "user 2x", class: "text-muted", title: "Профиль"
           .menu-item
             = link_to destroy_user_session_path, method: :delete do
               = fa_icon "power-off 2x", class: "text-muted", title: "Выйти"
+
     .row
       .col-md-6.col-md-offset-3
         %h1.title Список оборудования
+        -#= link_to new_equipment_path, method: :get do
+        -#  = fa_icon "plus-square 5x", class: "text-muted", title: "Добавить оборудование"
     .row
       .col-md-12
         %nav

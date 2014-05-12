@@ -6,7 +6,10 @@ ru:
       equipment:
         model: "'Модель'"
         inventory_number: "'Инвентарный номер'"
-      # will translate User attribute "login" as "Handle"
+        department: "'Подразделение'"
+        manufacturer: "'Производитель'"
+        equipment_type: "'Тип оборудования'"
+
   date:
     formats:
       # Use the strftime parameters for formats.

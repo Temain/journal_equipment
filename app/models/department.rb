@@ -12,4 +12,6 @@ class Department < ActiveRecord::Base
   has_many :equipments
 
   validates :name, presence: true, uniqueness: true
+
+  default_scope -> { order('name ASC') }
 end

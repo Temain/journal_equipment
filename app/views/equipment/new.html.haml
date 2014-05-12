@@ -1,4 +1,4 @@
-.container-fluid
+.container-fluid.edit
   .header
     .row.menu
       .col-md-12
@@ -18,11 +18,17 @@
     .row
       .col-md-6.col-md-offset-3
         %h1.title Новое оборудование
-  .row
+  .row.content
     .col-md-6.col-md-offset-3
       =form_for(@item, html: { class: "form-horizontal" }) do |f|
         %fieldset
-          %legend Добавление
+          -#%legend Добавление
+
+          #remote.search-field.form-group
+            .col-lg-12
+              .left-inner-addon
+                %i.glyphicon.glyphicon-search
+              = text_field_tag :full_name, nil, class: "typeahead search-equipment form-control", placeholder: "Найти оборудование..."
 
           #flash-display
             - if @item.errors.any?
@@ -31,16 +37,11 @@
                 - @item.errors.full_messages.each do |msg|
                   %li= msg
 
-          #remote.search-field.form-group
-            .col-lg-12
-              .left-inner-addon
-                %i.glyphicon.glyphicon-search
-              = text_field_tag :full_name, nil, class: "typeahead search-equipment form-control", placeholder: "Найти оборудование..."
-
           .form-group
-            = f.label :model, "Модель", class: "col-lg-2 control-label"
+            = f.label :equipment_type_id, "Тип", class: "col-lg-2 control-label"
             .col-lg-10
-              = f.text_field :model, placeholder: "Введите модель...", class: "form-control"
+              = f.select :equipment_type_id, @equipment_types,
+                         { prompt: "Выберите тип оборудования..." }, class: "form-control"
 
           = fields_for @item.manufacturer do |m|
             .form-group
@@ -49,10 +50,9 @@
                 = m.text_field :name, class: "typeahead manufacturer form-control", placeholder: "Введите производителя..."
 
           .form-group
-            = f.label :inventory_number, "Инвентарный номер", class: "col-lg-2 control-label"
+            = f.label :model, "Модель", class: "col-lg-2 control-label"
             .col-lg-10
-              = f.text_field :inventory_number, placeholder: "Введите инвентарный номер...",
-                              maxlength: "12", class: "form-control"
+              = f.text_field :model, placeholder: "Введите модель...", class: "form-control"
 
           .form-group
             = f.label :department_id, "Подразделение", class: "col-lg-2 control-label"
@@ -61,10 +61,10 @@
                   { prompt: "Выберите подразделение..." }, class: "form-control"
 
           .form-group
-            = f.label :equipment_type_id, "Тип", class: "col-lg-2 control-label"
+            = f.label :inventory_number, "Инвентарный номер", class: "col-lg-2 control-label"
             .col-lg-10
-              = f.select :equipment_type_id, @equipment_types,
-                  { prompt: "Выберите тип оборудования..." }, class: "form-control"
+              = f.text_field :inventory_number, placeholder: "Введите инвентарный номер...",
+                              maxlength: "12", class: "form-control"
 
           .form-group
             .col-lg-10.col-lg-offset-2
