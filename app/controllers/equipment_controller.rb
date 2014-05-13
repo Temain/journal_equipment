@@ -51,22 +51,26 @@ class EquipmentController < ApplicationController
   end
 
   def repair
-
   end
 
   def relocation
-    unless params[:new_department_id].first.blank?
-      new_department = Department.find(params[:new_department_id]).first
-      relocation = Relocation.new(old_department_id: @item.department_id, new_department_id: new_department.id)
-      relocation.create_journal_record(equipment_id: @item.id, user_id: current_user.id, action_date: Time.now)
+    new_department_id = params[:new_department_id].first
+    if new_department_id.blank?
+      flash[:danger] = "Пожалуйста, выберите подразделение."
+      redirect_to action: :index
+    else
+      new_department = Department.find(new_department_id) # Can throw RecordNotFound
+      @relocation = Relocation.new(old_department_id: @item.department_id, new_department_id: new_department_id)
+      @relocation.create_journal_record(equipment_id: @item.id, user_id: current_user.id, action_date: Time.now)
       @item.department = new_department
-      if relocation.save && @item.save
-        flash[:notice] = "#{@item.full_name} успешно перемешен в подразделение #{new_department.name}"
+      if @relocation.save && @item.save
+        flash[:notice] = "#{@item.full_name} успешно перемешен в подразделение #{new_department.name}."
         redirect_to equipment_index_path
       end
-    else
-      flash[:danger] = "Пожалуйста, выберите подразделение."
     end
+  rescue
+    flash[:danger] = "Указано несуществующее подразделение."
+    redirect_to action: :index
   end
 
   def load_manufacturers

@@ -201,9 +201,9 @@ body {
 }
 .onclick-menu:focus {
   /* clicking on label should toggle the menu */
-  pointer-events: none;
+   pointer-events: none;
 }
-.onclick-menu:hover .onclick-menu-content {
+.onclick-menu:focus .onclick-menu-content {
   /*  opacity is 1 in opened state (see below) */
   opacity: 1;
   visibility: visible;
