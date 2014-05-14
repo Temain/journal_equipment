@@ -56,7 +56,7 @@ namespace :db do
     end
 
     # Create relocation actions and save it in journal records table
-    30.times do
+    50.times do
       relocation = Relocation.create!(new_department_id: rand(1..Department.count),
                                       old_department_id: rand(1..Department.count))
 
@@ -70,14 +70,14 @@ namespace :db do
     end
 
     # Create spares
-    20.times do |n|
+    200.times do |n|
       Spare.create!(name:              "#{Faker::Lorem.word} ##{n}",
                     equipment_type_id: rand(1..EquipmentType.count)
       )
     end
 
     # Create repair actions and save it in journal records table
-    30.times do
+    50.times do
       repair = Repair.create!(reason:   Faker::Lorem.sentence)
 
       ids = Spare.pluck(:id)

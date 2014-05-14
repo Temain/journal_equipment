@@ -10,7 +10,7 @@ module HistoryHelper
         end
       else
         content_tag(:div, event.reason) +
-        (event.spares.nil? ? "" : content_tag(:div, "Список замененных деталей: ")) +
+        (event.spares.empty? ? "Необходимости в замене деталей не было." : content_tag(:div, "Список замененных деталей: ")) +
         content_tag(:ul) do
           event.spares.map { |item| content_tag(:li, item.name) }.join(' ').html_safe
         end

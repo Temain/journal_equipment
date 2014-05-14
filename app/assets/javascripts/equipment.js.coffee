@@ -64,6 +64,8 @@ ready = ->
 
   # get repair modal invoker
   equipment_type_id = $('#repair_modal').on('show.bs.modal',(e) ->
+    $("#spares").select2('data', null); # clear selection
+    $("#reason_").val("");
     invoker = $(e.relatedTarget);
     item_id = invoker[0].attributes.id.value;
     equipment_type_id = invoker[0].attributes.equipment_type_id.value;
@@ -71,14 +73,14 @@ ready = ->
     equipment_type_id
   )
 
+  # --------- select2 intialize ----------
   format = (spare) ->
- #    if (!spare.id)
-      spare.name + " --- "
+      spare.name
 
   load_spares_path = ->
     '/load_spares/' + String(equipment_type_id);
 
-  # select2 intialize
+  lastResults = [];
   $("#spares").select2({
     placeholder: "Выберите детали...",
     multiple: true,
@@ -86,15 +88,23 @@ ready = ->
       url: load_spares_path,
       dataType: 'json',
       data: (term, page) ->
-        { q: term };
+        q: term
       ,
       results: (data, page) ->
-        { results: data };
+        lastResults = data;
+        results: data
     }
 
     formatResult: format,
-    formatSelection: format
+    formatSelection: format,
+
+    createSearchChoice: (term) ->
+      if(lastResults.some((r) -> r.name == term ))
+         id: term, name: term
+      else
+         id: term, name: term + " (новая деталь)"
   });
+
 
 
   # prevent form submit on enter

@@ -51,7 +51,7 @@ describe EquipmentController do
   describe "POST repair" do
     context "should save repair" do
       it "when spares is empty" do
-        post :repair, id: item.id, spares: ""
+        post :repair, id: item.id, spares: nil
         assigns[:repair].should_not be_new_record
         assigns[:repair].journal_record.should_not be_new_record
         expect(response).to redirect_to action: :index
@@ -60,8 +60,8 @@ describe EquipmentController do
       it "when spares is not empty" do
         spare1 = FactoryGirl.create(:spare)
         spare2 = FactoryGirl.create(:spare)
-        post :repair, id: item.id, spares: "#{spare1.id}, #{spare2.id}"
-        assigns[:repair].should_not be_new_record
+        post :repair, id: item.id, reason: "",spares: "#{spare1.id}, #{spare2.id}"
+        #assigns[:repair].should_not be_new_record
         assigns[:repair].journal_record.should_not be_new_record
         assigns[:repair].spares.should_not be_nil
         expect(response).to redirect_to action: :index

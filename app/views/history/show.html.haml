@@ -24,7 +24,7 @@
     .row.header
       .col-md-6.col-md-offset-3
         %h1.title= @item.full_name
-    .row
+    .row.content
       .col-md-6.col-md-offset-3.col-xs-12
         %div{ id: "timelineContainer", class: "timelineContainer" }
           - @journal_records.each do |one_year_records|

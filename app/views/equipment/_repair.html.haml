@@ -8,11 +8,14 @@
         .modal-body
 
           %fieldset
+
             .form-group
+              = label :reason, "Причина ремонта", class: "control-label"
               .col-lg-12
                 = text_area :reason, nil, rows: 5, :placeholder => 'Укажите причину ремонта...', class: "form-control"
 
             .form-group
+              = label "spares", "Замененные детали", class: "control-label"
               .col-lg-12
                 = hidden_field_tag "spares", nil, class: "form-control"
                 -#= select 'e1', nil, [], {}, id: "spares", class: "form-control", multiple: true

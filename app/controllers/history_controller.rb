@@ -3,7 +3,8 @@ class HistoryController < ApplicationController
   before_action :set_item
 
   def show
-    @journal_records = JournalRecord.all.group_by{ |i| i.action_date.year }
+    #@journal_records = JournalRecord.all.group_by{ |i| i.action_date.year }
+    @journal_records = @item.journal_records.group_by{ |i| i.action_date.year }
   end
 
   private

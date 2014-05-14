@@ -55,8 +55,7 @@ class EquipmentController < ApplicationController
     reason = params[:reason].join if params[:reason]
     @repair = Repair.new(reason: reason)
     params[:spares].split(',').each do |spare|
-      i = Spare.find_or_create_by(id: spare, equipment_type_id: @item.equipment_type_id)
-      @repair.spares << i
+      @repair.spares << Spare.find_or_create_by(id: spare, equipment_type_id: @item.equipment_type_id)
     end
     @repair.create_journal_record(equipment_id: @item.id, user_id: current_user.id, action_date: Time.now)
     if @repair.save
