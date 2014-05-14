@@ -43,6 +43,29 @@ describe EquipmentController do
       new_department = FactoryGirl.create(:department)
       post :relocation, id: item.id, new_department_id: ["#{new_department.id}"]
       assigns[:relocation].should_not be_new_record
+      assigns[:relocation].journal_record.should_not be_new_record
+      expect(response).to redirect_to action: :index
+    end
+  end
+
+  describe "POST repair" do
+    context "should save repair" do
+      it "when spares is empty" do
+        post :repair, id: item.id, spares: ""
+        assigns[:repair].should_not be_new_record
+        assigns[:repair].journal_record.should_not be_new_record
+        expect(response).to redirect_to action: :index
+      end
+
+      it "when spares is not empty" do
+        spare1 = FactoryGirl.create(:spare)
+        spare2 = FactoryGirl.create(:spare)
+        post :repair, id: item.id, spares: "#{spare1.id}, #{spare2.id}"
+        assigns[:repair].should_not be_new_record
+        assigns[:repair].journal_record.should_not be_new_record
+        assigns[:repair].spares.should_not be_nil
+        expect(response).to redirect_to action: :index
+      end
     end
   end
 end

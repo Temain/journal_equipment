@@ -12,4 +12,14 @@ class Spare < ActiveRecord::Base
   has_and_belongs_to_many :repairs
 
   validates :name, presence: true, uniqueness: true
+
+  private
+
+    def self.search(search)
+      if search
+        where(['name LIKE ?', "%#{ search }%"])
+      else
+        all
+      end
+    end
 end

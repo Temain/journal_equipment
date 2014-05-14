@@ -5,12 +5,13 @@ Rails.application.routes.draw do
   devise_for :users
   get 'persons/profile', as: 'user_root'
   get 'history/:id' => 'history#show', as: 'history'
-  get 'repair/:id' =>  'equipment#repair', as: 'repair'
   post 'equipment/:id/relocation' => 'equipment#relocation', as: 'relocation'
+  post 'equipment/:id/repair' => 'equipment#repair', as: 'repair'
 
   # returning JSON for typeaheads
-  get 'load_manufacturers' =>  'equipment#load_manufacturers', as: 'manufacturers'
-  get 'load_equipment' =>  'equipment#load_equipment', as: 'load_equipment'
+  get 'load_manufacturers' => 'equipment#load_manufacturers', as: 'manufacturers'
+  get 'load_equipment' => 'equipment#load_equipment', as: 'load_equipment'
+  get 'load_spares/:equipment_type_id' => 'equipment#load_spares', as: 'load_spares'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

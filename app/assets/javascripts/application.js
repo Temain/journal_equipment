@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap/dropdown
+//= require select2
+//= require select2_locale_ru
 //= require timeliner
 //= require jquery.mixitup.min
 //= require typeahead.jquery.min

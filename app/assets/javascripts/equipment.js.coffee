@@ -54,13 +54,48 @@ ready = ->
     $('#equipment_equipment_type_id').val(equipment.equipment_type.id);
   )
 
-  # get modal invoker
+  # get relocation modal invoker
   $('#relocation_modal').on('show.bs.modal',(e) ->
     invoker = $(e.relatedTarget);
     item_id = invoker[0].attributes.id.value;
     $('#relocation_modal form').attr('action', '/equipment/'+ item_id + '/relocation');
     $('#new_department_id_').val(null)
   )
+
+  # get repair modal invoker
+  equipment_type_id = $('#repair_modal').on('show.bs.modal',(e) ->
+    invoker = $(e.relatedTarget);
+    item_id = invoker[0].attributes.id.value;
+    equipment_type_id = invoker[0].attributes.equipment_type_id.value;
+    $('#repair_modal form').attr('action', '/equipment/'+ item_id + '/repair');
+    equipment_type_id
+  )
+
+  format = (spare) ->
+ #    if (!spare.id)
+      spare.name + " --- "
+
+  load_spares_path = ->
+    '/load_spares/' + String(equipment_type_id);
+
+  # select2 intialize
+  $("#spares").select2({
+    placeholder: "Выберите детали...",
+    multiple: true,
+    ajax: {
+      url: load_spares_path,
+      dataType: 'json',
+      data: (term, page) ->
+        { q: term };
+      ,
+      results: (data, page) ->
+        { results: data };
+    }
+
+    formatResult: format,
+    formatSelection: format
+  });
+
 
   # prevent form submit on enter
   $('#remote .typeahead').keydown ->

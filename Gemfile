@@ -36,6 +36,7 @@ gem 'haml-contrib'
 gem 'normalize-rails'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
+gem "select2-rails"
 gem 'annotate'
 gem 'russian'
 
