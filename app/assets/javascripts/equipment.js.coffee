@@ -13,7 +13,7 @@ ready = ->
     new Bloodhound
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: '/load_manufacturers',
+      #prefetch: '/load_manufacturers',
       remote: '/load_manufacturers/?query=%QUERY'
 
   manufacturers.initialize();
@@ -29,7 +29,7 @@ ready = ->
     new Bloodhound
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: '/load_equipment',
+      #prefetch: '/load_equipment',
       remote: '/load_equipment/?query=%QUERY'
 
   equipment.initialize();
@@ -65,7 +65,7 @@ ready = ->
   # get repair modal invoker
   equipment_type_id = $('#repair_modal').on('show.bs.modal',(e) ->
     $("#spares").select2('data', null); # clear selection
-    $("#reason_").val("");
+    $("reason_").val("");
     invoker = $(e.relatedTarget);
     item_id = invoker[0].attributes.id.value;
     equipment_type_id = invoker[0].attributes.equipment_type_id.value;

@@ -34,17 +34,21 @@ class Equipment < ActiveRecord::Base
 
     def self.search(search)
       if search
-        joins(:manufacturer).where("model LIKE ? OR inventory_number LIKE ? OR manufacturers.name LIKE ?", "%#{search}%","%#{search}%","%#{search}%")
+        joins(:manufacturer)
+          .where("model LIKE ? OR inventory_number LIKE ? OR manufacturers.name LIKE ?", "%#{search}%","%#{search}%","%#{search}%")
+          .includes(:manufacturer, :equipment_type, :department)
       else
-        all
+        includes(:manufacturer, :equipment_type, :department)
       end
     end
 
   def self.search_for_create(search)
     if search
-      joins(:equipment_type).joins(:manufacturer).where("model LIKE ? OR equipment_types.name LIKE ? OR manufacturers.name LIKE ?", "%#{search}%","%#{search}%","%#{search}%")
+      joins(:equipment_type, :manufacturer)
+        .where("model LIKE ? OR equipment_types.name LIKE ? OR manufacturers.name LIKE ?", "%#{search}%","%#{search}%","%#{search}%")
+        .includes(:manufacturer, :equipment_type)
     else
-      all
+      includes(:manufacturer, :equipment_type)
     end
   end
 end

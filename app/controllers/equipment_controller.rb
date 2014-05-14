@@ -3,7 +3,6 @@ class EquipmentController < ApplicationController
   before_action :set_item,  only: [:edit, :update, :destroy, :repair, :relocation]
   before_action :load_departments, only: [:index, :new, :edit, :create, :update, :relocation]
   before_action :load_equipment_types, only: [:new, :edit, :create, :update]
-  before_action :load_spares_array, only: [:index]
 
   def index
     @equipment = Equipment.search(params[:search])
@@ -126,9 +125,9 @@ class EquipmentController < ApplicationController
       @departments = Department.all.map { |department| [department.name, department.id] }
     end
 
-    def load_spares_array
-      @spares = EquipmentType.all.map { |type| [ type.name, type.spares.map { |spare| [spare.name, id: spare.id] }]}
-    end
+    #def load_spares_array
+    #  @spares = EquipmentType.includes(:spares).map { |type| [ type.name, type.spares.map { |spare| [spare.name, id: spare.id] }]}
+    #end
 
     def load_equipment_types
       @equipment_types = EquipmentType.all.map { |type| [type.name, type.id] }
