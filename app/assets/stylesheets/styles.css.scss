@@ -245,6 +245,12 @@ body {
   }
 }
 
+.select2-container-multi .select2-choices .select2-search-choice {
+  background-color: #ffffff;
+  background-image: none;
+  border-radius: 0px;
+}
+
 
 /* text fields placeholder */
 ::-webkit-input-placeholder { color: #8b8b8b !important; }

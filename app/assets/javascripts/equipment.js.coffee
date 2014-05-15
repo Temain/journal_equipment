@@ -59,7 +59,7 @@ ready = ->
     invoker = $(e.relatedTarget);
     item_id = invoker[0].attributes.id.value;
     $('#relocation_modal form').attr('action', '/equipment/'+ item_id + '/relocation');
-    $('#new_department_id_').val(null)
+    $('#new_department_id_').val(null);
   )
 
   # get repair modal invoker
@@ -75,7 +75,7 @@ ready = ->
 
   # --------- select2 intialize ----------
   format = (spare) ->
-      spare.name
+      spare.name;
 
   load_spares_path = ->
     '/load_spares/' + String(equipment_type_id);
@@ -88,11 +88,11 @@ ready = ->
       url: load_spares_path,
       dataType: 'json',
       data: (term, page) ->
-        q: term
+        q: term;
       ,
       results: (data, page) ->
         lastResults = data;
-        results: data
+        results: data;
     }
 
     formatResult: format,
@@ -100,12 +100,22 @@ ready = ->
 
     createSearchChoice: (term) ->
       if(lastResults.some((r) -> r.name == term ))
-         id: term, name: term
+         id: term, name: term;
       else
-         id: term, name: term + " (новая деталь)"
+         id: term, name: term + " (новая деталь)";
   });
 
-
+  # item action menu
+  $("a.actions-link").on('click', (e) ->
+    #$(".actions > a").css("visibility", "visible");
+    actions = $( this ).parent();
+    actions.addClass("showed");
+    actions_links = $(".actions.showed a").not("a.actions-link");
+    $(".showed > a.actions-link").hide("fast");
+    $.each(actions_links, (index, obj) ->
+       $(this).show("fast");
+    )
+  )
 
   # prevent form submit on enter
   $('#remote .typeahead').keydown ->
@@ -117,3 +127,9 @@ ready = ->
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
+$(document).on('click', (e) ->
+  if( (!$(e.target).is('.actions.showed > a > i')))
+    $(".actions.showed > a").not("a.actions-link").hide(1000);
+    $(".showed > a.actions-link").show("fast");
+    $(".actions.showed").removeClass("showed");
+)

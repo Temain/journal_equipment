@@ -76,8 +76,8 @@
                 = fa_icon "clock-o", class: "text-muted", title: "История"
               = link_to equipment_path(i.id), method: :delete do
                 = fa_icon "trash-o", class: "text-muted", title: "Удалить"
-              = link_to 'javascript:;', class: "actions-link" do
-                = fa_icon "bars", class: "text-muted", title: "Действия"
+              = link_to 'javascript:;', class: "actions-link", id: i.id do
+                = fa_icon "bars", class: "text-muted", title: "Действия", id: i.id
 
 
             -#.onclick-menu
