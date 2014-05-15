@@ -53,8 +53,14 @@ class EquipmentController < ApplicationController
   def repair
     reason = params[:reason].join if params[:reason]
     @repair = Repair.new(reason: reason)
-    params[:spares].split(',').each do |spare|
-      @repair.spares << Spare.find_or_create_by(id: spare, equipment_type_id: @item.equipment_type_id)
+    params[:spares].split(',').each do |spare_id|
+      spare = if spare_id.numeric?
+        Spare.find(spare_id)
+      else
+        Spare.create(name: spare_id, equipment_type_id: @item.equipment_type_id)
+      end
+
+      @repair.spares << spare
     end
     @repair.create_journal_record(equipment_id: @item.id, user_id: current_user.id, action_date: Time.now)
     if @repair.save
@@ -137,4 +143,10 @@ class EquipmentController < ApplicationController
     def equipment_params
       params.require(:equipment).permit(:model, :inventory_number, :equipment_type_id, :department_id)
     end
+end
+
+class String
+  def numeric?
+    Float(self) != nil rescue false
+  end
 end
