@@ -19,7 +19,7 @@ class JournalRecord < ActiveRecord::Base
 
   def full_text
     if journalable.instance_of?(Relocation)
-      "Передан подразделению"
+      "Передан подразделению #{journalable.new_department.name}"
     else
       "Отправлен в ремонт"
     end

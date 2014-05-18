@@ -117,6 +117,37 @@
     .bottom {
       .department {
         font-size: 0.8em;
+
+        .dropdown-menu {
+          font-size: 1em;
+          white-space: nowrap;
+          padding: 10px;
+          border: 1px solid #5cb85c;
+          box-shadow: 0 0 5px #5cb85c;
+          -webkit-box-shadow: 0 0 5px #5cb85c;
+          -moz-box-shadow: 0 0 5px #5cb85c;
+        }
+
+        .btn-group {
+          vertical-align: text-top;
+          button.dropdown-toggle {
+            background-color: #2b3e50;
+            font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            border: none;
+            border-bottom: 1px solid #2b3e50;
+            padding: 0px;
+            margin: 0px;
+
+            &:hover {
+              color: #ffffff;
+              border-bottom: 1px solid #5cb85c;
+            }
+            &:focus {
+              color: #5cb85c;
+            }
+          }
+        }
+
       }
 
       .created_at{

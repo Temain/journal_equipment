@@ -25,6 +25,14 @@
             - @categories.each_with_index do |c, index|
               %li.nav-item
                 = button_tag c.name, class: "filter link", data: { filter: ".category-#{index}" }
+                -#.btn-group
+                -#  = button_tag class: "filter link", type: "button", data: { toggle: "dropdown" } do
+                -#    = c.name
+                -#    %span.caret
+                -#  %ul.dropdown-menu
+                -#    - c.equipment_types.each do |type|
+                -#      %li
+                -#        = link_to type.name, "#"
 
   .row
     .col-md-6.col-md-offset-3
@@ -46,15 +54,10 @@
       -#.btn-group
       -#  =button_tag class: "btn btn-default dropdown-toggle", type: "button", data: { toggle: "dropdown" } do
       -#    Dropdown
-      -#    %span.caret
+      -#    -#%span.caret
       -#  %ul.dropdown-menu
-      -#    %li
-      -#      = link_to "dropdown", "#"
-      -#      = link_to "dropdown", "#"
-      -#      = link_to "dropdown", "#"
-      -#      = link_to "dropdown", "#"
-      -#    %li.divider
-      -#      = link_to "dropdown", "#"
+      -#    %p ddfgdfg
+      -#    %p rterterter 2
 
       -#=button_tag "Filter", class: "filter", data: { filter: ".category-0" }
       = render partial: 'relocation'
