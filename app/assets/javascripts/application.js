@@ -15,6 +15,10 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap/dropdown
+//= require moment
+//= require bootstrap-datetimepicker
+//= require moment/ru
+//= require locales/bootstrap-datetimepicker.ru.js
 //= require select2
 //= require select2_locale_ru
 //= require timeliner

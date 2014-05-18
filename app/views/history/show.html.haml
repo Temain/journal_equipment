@@ -27,16 +27,20 @@
     .row.content
       .col-md-6.col-md-offset-3.col-xs-12
         %div{ id: "timelineContainer", class: "timelineContainer" }
-          - @journal_records.each do |one_year_records|
-            %div{ class: "timelineMajor" }
-              %h2{ class: "timelineMajorMarker" }
-                %span= one_year_records.first
-              - one_year_records.last.each_with_index do |event, index|
-                %dl{ class: "timelineMinor" }
-                  %dt{ id:"event-#{one_year_records.first}#{index + 1}" }
-                    %a
-                      %strong= Russian::strftime(event.action_date, "%B, %d")
-                      #{event.full_text}
-                  %dd{ class: "timelineEvent", id: "event-#{one_year_records.first}#{index + 1}EX", style: "display: none; " }
-                    = event_subtext(event)
+          - if @journal_records.any?
+            - @journal_records.each do |one_year_records|
+              %div{ class: "timelineMajor" }
+                %h2{ class: "timelineMajorMarker" }
+                  %span= one_year_records.first
+                - one_year_records.last.each_with_index do |event, index|
+                  %dl{ class: "timelineMinor" }
+                    %dt{ id:"event-#{one_year_records.first}#{index + 1}" }
+                      %a
+                        %strong= Russian::strftime(event.action_date, "%B, %d")
+                        #{event.full_text}
+                    %dd{ class: "timelineEvent", id: "event-#{one_year_records.first}#{index + 1}EX", style: "display: none; " }
+                      = event_subtext(event)
+          -else
+            %h3 С данным оборудованием ничего не происходило.
+
 

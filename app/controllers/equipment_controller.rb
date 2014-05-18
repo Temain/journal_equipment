@@ -42,8 +42,8 @@ class EquipmentController < ApplicationController
     @manufacturer = Manufacturer.find_or_create_by(name: params[:manufacturer][:name])
     if !@manufacturer.name.empty? && @manufacturer.new_record?
       @manufacturer.save
-      @item.manufacturer = @manufacturer
     end
+    @item.manufacturer = @manufacturer
 
     if @item.update(equipment_params)
       flash[:notice] = "Изменения успешно сохранены."
@@ -65,10 +65,10 @@ class EquipmentController < ApplicationController
       else
         Spare.create(name: spare_id, equipment_type_id: @item.equipment_type_id)
       end
-
       @repair.spares << spare
     end
-    @repair.create_journal_record(equipment_id: @item.id, user_id: current_user.id, action_date: Time.now)
+    @repair.create_journal_record(equipment_id: @item.id, user_id: current_user.id,
+                                  action_date: params[:action_date].to_date)
     if @repair.save
       flash[:notice] = "#{@item.full_name} успешно отправлен в ремонт."
     else

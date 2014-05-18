@@ -38,7 +38,9 @@
                   %li= msg
 
           .form-group
-            = f.label :equipment_type_id, "Тип", class: "col-lg-2 control-label"
+            - field_with_errors @item, :equipment_type do
+              - f.label :equipment_type_id, "Тип", class: "col-lg-2 control-label"
+
             .col-lg-10
               = f.select :equipment_type_id, @equipment_types,
                          { prompt: "Выберите тип оборудования..." }, class: "form-control"
@@ -55,7 +57,8 @@
               = f.text_field :model, placeholder: "Введите модель...", class: "form-control"
 
           .form-group
-            = f.label :department_id, "Подразделение", class: "col-lg-2 control-label"
+            - field_with_errors @item, :department do
+              = f.label :department_id, "Подразделение", class: "col-lg-2 control-label"
             .col-lg-10
               = f.select :department_id, @departments,
                   { prompt: "Выберите подразделение..." }, class: "form-control"

@@ -21,13 +21,13 @@ module JournalEquipment
     # config.i18n.default_locale = :de
     config.i18n.default_locale = :ru
 
-    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
-      unless html_tag =~ /^<label/
-        "<div class=\"field_with_errors\">#{html_tag}</div>".html_safe
-      else
-        html_tag.html_safe
-      end
-    end
+    #config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+    #  unless html_tag =~ /^<label/
+    #    "<div class=\"field_with_errors\">#{html_tag}</div>".html_safe
+    #  else
+    #    html_tag.html_safe
+    #  end
+    #end
 
     config.assets.precompile += ["fontawesome-webfont.ttf",
                                  "fontawesome-webfont.eot",

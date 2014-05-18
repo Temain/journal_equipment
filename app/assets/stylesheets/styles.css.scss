@@ -151,40 +151,6 @@ body {
 //  text-align: left;
 //}
 
-/* ----------- modal vertically center ----------- */
-//.modal-dialog {
-//  position:absolute;
-//  top:50% !important;
-//  transform: translate(0, -50%) !important;
-//  -ms-transform: translate(0, -50%) !important;
-//  -webkit-transform: translate(0, -50%) !important;
-//  margin:auto 5%;
-//  width:90%;
-//  height:80%;
-//}
-//.modal-content {
-//  min-height:100%;
-//  position:absolute;
-//  top:0;
-//  bottom:0;
-//  left:0;
-//  right:0;
-//}
-//.modal-body {
-//  position:absolute;
-//  top:45px; // height of header
-//  bottom:45px;  // height of footer
-//  left:0;
-//  right:0;
-//  overflow-y:auto;
-//}
-//.modal-footer {
-//  position:absolute;
-//  bottom:0;
-//  left:0;
-//  right:0;
-//}
-
 
 /* ------------ on click menu ------------------ */
 .onclick-menu {
@@ -251,6 +217,28 @@ body {
   border-radius: 0px;
 }
 
+/* ------ bootstrap datepicker -------- */
+.bootstrap-datetimepicker-widget td.day:hover,
+.bootstrap-datetimepicker-widget td.hour:hover,
+.bootstrap-datetimepicker-widget td.minute:hover,
+.bootstrap-datetimepicker-widget td.second:hover,
+.bootstrap-datetimepicker-widget thead tr:first-child th:hover,
+.bootstrap-datetimepicker-widget td span:hover {
+  background: #2b3e50;
+}
+
+/* ------- form validation ---------- */
+/* Override Rail's default error calls with Bootstrap 3 */
+.field_with_errors > label {
+  color: red;
+}
+
+//.field_with_errors > input {
+//  border: 1px solid #df1214;
+//  box-shadow: 0 0 5px rgb(255, 31, 28);
+//  -webkit-box-shadow: 0 0 5px rgb(255, 31, 28);
+//  -moz-box-shadow: 0 0 5px rgb(255, 31, 28);
+//}
 
 /* text fields placeholder */
 ::-webkit-input-placeholder { color: #8b8b8b !important; }

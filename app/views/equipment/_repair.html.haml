@@ -8,6 +8,13 @@
         .modal-body
 
           %fieldset
+            .form-group
+              = label :action_date, "Дата ремонта", class: "control-label"
+              .col-lg-12
+                #datetimepicker.input-group.date{ "data-date-format" => "DD.MM.YYYY" }
+                  = text_field_tag :action_date, nil, class: "form-control"
+                  %span.input-group-addon.dark
+                    %span.glyphicon.glyphicon-calendar
 
             .form-group
               = label :reason, "Причина ремонта", class: "control-label"

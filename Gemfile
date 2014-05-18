@@ -31,10 +31,11 @@ gem 'haml'
 gem 'haml-rails'
 gem 'haml-contrib'
 #gem 'RedCloth'
-#gem 'bootstrap-sass'
 
 gem 'normalize-rails'
 gem 'bootstrap-sass'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 gem "font-awesome-rails"
 gem "select2-rails"
 gem 'kaminari'

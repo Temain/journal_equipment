@@ -65,13 +65,45 @@ ready = ->
   # get repair modal invoker
   equipment_type_id = $('#repair_modal').on('show.bs.modal',(e) ->
     $("#spares").select2('data', null); # clear selection
+    $('#action_date').val(formated_date(new Date()));
     $("reason_").val("");
+
     invoker = $(e.relatedTarget);
     item_id = invoker[0].attributes.id.value;
     equipment_type_id = invoker[0].attributes.equipment_type_id.value;
     $('#repair_modal form').attr('action', '/equipment/'+ item_id + '/repair');
     equipment_type_id
   )
+
+  $('#datetimepicker').datetimepicker({
+    language: 'ru',
+    pickTime: false,
+    startDate: new Date(2013, 2, 1),
+    endDate: new Date(2013, 3, 30)
+  });
+
+  $('#action_date').on('change', (ev) ->
+    date = ev.currentTarget.value;
+    unless moment(date, "DD.MM.YYYY", "ru").isValid()
+      $(this).val(formated_date(new Date()));
+  )
+
+  today = new Date();
+  $.fn.datetimepicker.defaults = {
+    showToday: true,
+    defaultDate: today
+  }
+  $('#action_date').focus( ->
+    $('#datetimepicker').data("DateTimePicker").show();
+  )
+  formated_date = (date) ->
+    day = date.getDate();
+    month = date.getMonth() + 1;
+    year = date.getFullYear();
+    if (month < 10)
+     month = "0" + month;
+    return day + "." + month + "." + year;
+
 
   # --------- select2 intialize ----------
   format = (spare) ->

@@ -80,6 +80,11 @@ p {
     padding-top: 25px;
 }
 
+.timelineContainer h3 {
+    margin-bottom: 45px;
+    margin-left: 20px;
+}
+
 div.timelineToggle {
 	float:right;
 	margin-right:0;
