@@ -30,6 +30,10 @@ class Equipment < ActiveRecord::Base
     "#{equipment_type.name} #{manufacturer.name} #{model}"
   end
 
+  def to_partial_path
+    'equipment/item'
+  end
+
   private
 
     def self.search(search)

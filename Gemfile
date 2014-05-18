@@ -37,6 +37,7 @@ gem 'normalize-rails'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem "select2-rails"
+gem 'kaminari'
 gem 'annotate'
 gem 'russian'
 

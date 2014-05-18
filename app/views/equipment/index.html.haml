@@ -63,36 +63,7 @@
       = render partial: 'repair'
 
       #Container
-        - @equipment.each do |i|
-          = content_tag :div, class: "item mix category-#{i.equipment_type.category.id - 1}" do
-            .actions
-              = link_to 'javascript:;', class: "repair-link" do
-                = fa_icon "wrench", class: "text-muted", title: "В ремонт", "data-toggle" => "modal", "data-target" => "#repair_modal", id: i.id, equipment_type_id: i.equipment_type.id
-              = link_to 'javascript:;' do
-                = fa_icon "exchange", class: "text-muted", title: "Переместить", "data-toggle" => "modal", "data-target" => "#relocation_modal", id: i.id
-              = link_to edit_equipment_path(i.id) do
-                = fa_icon "pencil", class: "text-muted", title: "Редактировать"
-              = link_to history_path(i.id), method: :get do
-                = fa_icon "clock-o", class: "text-muted", title: "История"
-              = link_to equipment_path(i.id), method: :delete do
-                = fa_icon "trash-o", class: "text-muted", title: "Удалить"
-              = link_to 'javascript:;', class: "actions-link", id: i.id do
-                = fa_icon "bars", class: "text-muted", title: "Действия", id: i.id
-
-
-            -#.onclick-menu
-            -#  %ul.onclick-menu-content
-            -#    %li Look, mom
-            -#    %li no JavaScript!
-            -#    %li Pretty nice, right?
-
-            .name= i.full_name
-            .inventory= "Инвентарный номер: #{i.inventory_number}"
-            .bottom
-              .department= "Подразделение: #{i.department.name}"
-              .created_at= "Добавлен: #{i.created_at.strftime("%d.%m.%Y")}"
-            - if i.writed_off?
-              .writed_off= Списан
+        =render partial: 'container'
 
   .page-buffer
   %footer.row

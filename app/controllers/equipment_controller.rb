@@ -5,8 +5,14 @@ class EquipmentController < ApplicationController
   before_action :load_equipment_types, only: [:new, :edit, :create, :update]
 
   def index
-    @equipment = Equipment.search(params[:search])
+    @equipment = Equipment.search(params[:search]).page params[:page]
     @categories = Category.all
+
+    if request.xhr?
+      respond_to do |format|
+        format.js { render "container" }
+      end
+    end
   end
 
   def show

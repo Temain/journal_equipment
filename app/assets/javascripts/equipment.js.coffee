@@ -133,3 +133,10 @@ $(document).on('click', (e) ->
     $(".showed > a.actions-link").show("fast");
     $(".actions.showed").removeClass("showed");
 )
+$(document).on('page:fetch', ->
+  $('#Container').mixItUp('destroy');
+)
+
+$(document).on('page:load', ->
+  $('#Container').mixItUp();
+)
