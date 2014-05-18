@@ -8,6 +8,18 @@ ready = ->
     $(".nav-item").removeClass("active")
     $(this).parent().addClass("active")
 
+  # links popvers
+  $('.actions > #edit-link').popover();
+  $('.actions > #write-off-link').popover();
+  $('.actions > #repair-link').popover();
+  $('.actions > #relocation-link').popover();
+  $('.actions > #history-link').popover();
+  $('.actions > .actions-link').popover();
+  $('#create-link').popover();
+  $('#profile-link').popover();
+  $('#log-out-link').popover()
+  $('#back-link').popover();
+
   # manufacturers typeahead
   manufacturers =
     new Bloodhound

@@ -4,17 +4,20 @@
       .col-md-12
         .pull-right
           .menu-item
-            = link_to user_root_path do
-              = fa_icon "user 2x", class: "text-muted", title: "Профиль"
+            = link_to user_root_path, id: "profile-link", "data-content" => "Профиль",
+              "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
+              = fa_icon "user 2x", class: "text-muted"
           .menu-item
-            = link_to destroy_user_session_path, method: :delete do
-              = fa_icon "power-off 2x", class: "text-muted", title: "Выйти"
+            = link_to destroy_user_session_path, method: :delete, id: "log-out-link", "data-content" => "Выйти",
+              "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
+              = fa_icon "power-off 2x", class: "text-muted"
     .row.back
       .col-md-12
         .pull-left
           .menu-item
-            = link_to equipment_index_path, method: :get do
-              = fa_icon "arrow-circle-o-left 2x", class: "text-muted", title: "Назад"
+            = link_to equipment_index_path, method: :get, id: "back-link", "data-content" => "Назад",
+              "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
+              = fa_icon "arrow-circle-o-left 2x", class: "text-muted"
     .row
       .col-md-6.col-md-offset-3
         %h1.title= @item.full_name
