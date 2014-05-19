@@ -36,7 +36,14 @@
                 -#    - c.equipment_types.each do |type|
                 -#      %li
                 -#        = link_to type.name, "#"
-
+  .row.scroll-down
+    .col-md-12
+      = link_to 'javascript:;', id: "down" do
+        = fa_icon "angle-down 2x", class: "text-muted"
+  .row.scroll-up
+    .col-md-12
+      = link_to 'javascript:;', id: "up" do
+        = fa_icon "angle-up 2x", class: "text-muted"
   .row
     .col-md-6.col-md-offset-3
       #flash-display

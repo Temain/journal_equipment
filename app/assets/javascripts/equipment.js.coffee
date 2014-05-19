@@ -20,6 +20,24 @@ ready = ->
   $('#log-out-link').popover()
   $('#back-link').popover();
 
+  # scroll link
+  $(".scroll-down").click ->
+    $('body').animate({
+      scrollTop : $(window).scrollTop() + $(document).height()
+    },'slow');
+
+  $(".scroll-up").click ->
+    $('body').animate({
+      scrollTop : 0
+    },'slow');
+
+  half = $(document).height() / 2;
+  if $(document).scrollTop() > half
+    $(".scroll-down").css("display", "none");
+  else
+    $(".scroll-up").css("display", "none");
+
+
   # manufacturers typeahead
   manufacturers =
     new Bloodhound
@@ -183,4 +201,15 @@ $(document).on('page:fetch', ->
 
 $(document).on('page:load', ->
   $('#Container').mixItUp();
+)
+
+$(document).scroll( ->
+  half = $(document).height() / 2;
+
+  if $(document).scrollTop() > half
+    $(".scroll-down").hide("slow");
+    $(".scroll-up").show("slow");
+  else
+    $(".scroll-down").show("slow");
+    $(".scroll-up").hide("slow");
 )

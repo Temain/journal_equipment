@@ -54,6 +54,25 @@ body {
     }
   }
 
+  .scroll-up, .scroll-down {
+    @extend .menu-base;
+    right: 0px;
+    top: 50%;
+    opacity: 0.5;
+
+    .text-muted {
+      color: #4e5d6c;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    i:hover {
+      color: #ffffff;
+    }
+  }
+
   .main {
     max-height: 100%;
     max-width: 100%;
@@ -230,7 +249,17 @@ body {
 /* ------- form validation ---------- */
 /* Override Rail's default error calls with Bootstrap 3 */
 .field_with_errors > label {
-  color: red;
+  color: #d9534f;
+}
+
+select {
+  border: 0 !important;  /*Removes border*/
+  -webkit-appearance: none;  /*Removes default chrome and safari style*/
+  -moz-appearance: none; /* Removes Default Firefox style*/
+  background: #ffffff url(down.png) no-repeat 96% center !important;
+  width: 100px; /*Width of select dropdown to give space for arrow image*/
+  text-indent: 0.01px; /* Removes default arrow from firefox*/
+  text-overflow: "";  /*Removes default arrow from firefox*/ /*My custom style for fonts*/
 }
 
 //.field_with_errors > input {
