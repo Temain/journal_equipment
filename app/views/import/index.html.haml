@@ -1,0 +1,48 @@
+.container-fluid
+  .import
+    .row.menu
+      .col-md-12
+        .pull-right
+          .menu-item
+            = link_to user_root_path, id: "profile-link", "data-content" => "Профиль",
+              "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
+              = fa_icon "user 2x", class: "text-muted"
+          .menu-item
+            = link_to destroy_user_session_path, method: :delete, id: "log-out-link", "data-content" => "Выйти",
+              "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
+              = fa_icon "power-off 2x", class: "text-muted"
+    .row.back
+      .col-md-12
+        .pull-left
+          .menu-item
+            = link_to equipment_index_path, method: :get, id: "back-link", "data-content" => "Назад",
+              "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
+              = fa_icon "arrow-circle-o-left 2x", class: "text-muted"
+    .row.header
+      .col-md-6.col-md-offset-3
+        %h1.title Импорт
+    .row.content
+      .col-md-12.col-xs-12
+        -#%h4 Последний импорт был произведен {дата} из файла {имя файла}, добавлено: {#####}, обновлено: {#####}
+        -#= form_tag({ action: :upload }, html: { class: "form-horizontal" }, multipart: true) do
+        -#  .input-group
+        -#    %span.input-group-addon.light
+        -#      %i.glyphicon.glyphicon-upload
+        -#    = text_field_tag :file_name, params[:file_name], class: "form-control", placeholder: "Файл не выбран..."
+        -#    %span.input-group-btn
+        -#      = button_tag "Выбор файла", id: "upload_btn", class: "btn btn-primary", type: "button", name: nil
+        -#    = file_field_tag 'import_file', accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+        = form_tag({ action: :upload }, html: { class: "form-horizontal" }, multipart: true) do
+          = file_field_tag 'import_file', accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+          .actions
+            .file-item
+              = link_to 'javascript:;', id: "upload_lnk" do
+                = fa_icon "file 3x", class: "text-muted"
+                %div Выбрать файл
+
+            .hidden-item.hidden-xs
+
+            .import-item
+              = link_to equipment_index_path, method: :get do
+                = fa_icon "download 3x", class: "text-muted"
+                %div Загрузить

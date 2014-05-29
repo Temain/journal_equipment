@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post 'equipment/:id/relocation' => 'equipment#relocation', as: 'relocation'
   post 'equipment/:id/repair' => 'equipment#repair', as: 'repair'
 
+  get 'import' => 'import#index', as: 'import'
+  post 'upload' => 'import#upload', as: 'upload'
+
   # returning JSON for typeaheads
   get 'load_manufacturers' => 'equipment#load_manufacturers', as: 'manufacturers'
   get 'load_equipment' => 'equipment#load_equipment', as: 'load_equipment'
