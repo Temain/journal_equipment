@@ -4,6 +4,10 @@
       .col-md-12.col-xs-12
         .pull-right
           .menu-item
+            = link_to import_path, method: :get, id: "import-link", "data-content" => "Импорт",
+              "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
+              = fa_icon "download 2x", class: "text-muted"
+          .menu-item
             = link_to new_equipment_path, method: :get, id: "create-link", "data-content" => "Добавить оборудование",
                "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
               = fa_icon "plus-square 2x", class: "text-muted"

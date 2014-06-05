@@ -6,6 +6,6 @@ class ImportController < ApplicationController
   end
 
   def upload
-
+    i = 0
   end
 end

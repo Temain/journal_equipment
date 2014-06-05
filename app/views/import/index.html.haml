@@ -32,7 +32,7 @@
         -#    %span.input-group-btn
         -#      = button_tag "Выбор файла", id: "upload_btn", class: "btn btn-primary", type: "button", name: nil
         -#    = file_field_tag 'import_file', accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-        = form_tag({ action: :upload }, html: { class: "form-horizontal" }, multipart: true) do
+        = form_tag({ action: :upload }, html: { class: "form-horizontal" }, id: "import_form", multipart: true) do
           = file_field_tag 'import_file', accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
           .actions
             .file-item
@@ -43,6 +43,6 @@
             .hidden-item.hidden-xs
 
             .import-item
-              = link_to equipment_index_path, method: :get do
+              = link_to 'javascript:;', id: "import_lnk" do
                 = fa_icon "download 3x", class: "text-muted"
                 %div Загрузить

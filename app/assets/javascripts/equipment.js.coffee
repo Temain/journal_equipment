@@ -19,6 +19,7 @@ ready = ->
   $('#profile-link').popover();
   $('#log-out-link').popover()
   $('#back-link').popover();
+  $('#import-link').popover();
 
   # scroll link
   $(".scroll-down").click ->
