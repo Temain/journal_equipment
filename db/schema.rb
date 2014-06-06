@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509150447) do
+ActiveRecord::Schema.define(version: 20140606020928) do
 
   create_table "categories", force: true do |t|
     t.string "name", null: false
+  end
+
+  create_table "department_syncs", id: false, force: true do |t|
+    t.integer "department_id", null: false
+    t.string  "alias",         null: false
   end
 
   create_table "departments", force: true do |t|
@@ -26,12 +31,17 @@ ActiveRecord::Schema.define(version: 20140509150447) do
   create_table "equipment", force: true do |t|
     t.integer  "equipment_type_id",                 null: false
     t.integer  "department_id",                     null: false
-    t.integer  "inventory_number"
+    t.string   "inventory_number"
     t.boolean  "writed_off",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "manufacturer_id"
     t.string   "model"
+  end
+
+  create_table "equipment_type_syncs", id: false, force: true do |t|
+    t.integer "equipment_type_id", null: false
+    t.string  "alias",             null: false
   end
 
   create_table "equipment_types", force: true do |t|

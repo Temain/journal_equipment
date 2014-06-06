@@ -10,6 +10,7 @@
 
 class Department < ActiveRecord::Base
   has_many :equipments
+  has_many :department_syncs
 
   validates :name, presence: true, uniqueness: true
 

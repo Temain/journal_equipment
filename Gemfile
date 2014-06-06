@@ -41,6 +41,8 @@ gem "select2-rails"
 gem 'kaminari'
 gem 'annotate'
 gem 'russian'
+gem 'roo'
+gem 'unicode'
 
 group :development, :test do
   gem 'rspec-rails'

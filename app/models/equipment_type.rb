@@ -11,6 +11,7 @@ class EquipmentType < ActiveRecord::Base
   belongs_to :category
   has_many   :equipments
   has_many   :spares
+  has_many   :equipment_type_syncs
 
   validates :name, presence: true, uniqueness: true
 end

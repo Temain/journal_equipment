@@ -25,10 +25,10 @@ class Equipment < ActiveRecord::Base
   validates :department, presence: true
   validates :equipment_type, presence: true
   #validates :manufacturer, presence: true
-  validate :when_manufacturer_empty
+  #validate :when_manufacturer_empty
 
   def full_name
-    "#{equipment_type.name} #{manufacturer.name} #{model}"
+    "#{equipment_type.name} #{ manufacturer.nil? ? "" : manufacturer.name } #{ model ? model : "" }"
   end
 
   def to_partial_path
@@ -60,4 +60,136 @@ class Equipment < ActiveRecord::Base
     def when_manufacturer_empty
       @errors.add(:manufacturer, 'не может быть пустым') if manufacturer_id.nil?
     end
+
+  def self.import(file)
+    spreadsheet = open_spreadsheet(file)
+    spreadsheet.default_sheet = spreadsheet.sheets.first
+    header = spreadsheet.row(1)
+    @rows = [["Тип", "Производитель", "Модель", "Инвентарный номер", "Подразделение"]]
+
+    #(2..spreadsheet.last_row).each do |i|
+    (2..20).each do |i|
+      row = Hash[[header, spreadsheet.row(i)].transpose]
+      if row["name"]
+        @row = { name: [], manufacturer: [], model: [],
+                 inventory_number: [row["inventory_number"].strip],
+                 department: [] }
+        check_existence(row)
+        parse(row["name"])
+        @rows << @row.values.map { |c| Unicode::capitalize(c.join(" ")) }
+      end
+    end
+
+    save_import
+    write
+  end
+
+  def self.open_spreadsheet(file)
+    case File.extname(file.original_filename)
+      #when ".csv" then Csv.new(file.path, nil, :ignore)
+      when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
+      when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+      else raise "Unknown file type: #{file.original_filename}"
+    end
+  end
+
+  def self.parse name
+    name.split.each_with_index do |word, index|
+      if word =~ /"[а-яА-Я]+.+"/
+        if @row[:manufacturer].frozen?
+          @row[:model] << word.strip
+        else
+          @row[:manufacturer] << word.strip
+        end
+      elsif word =~ /[a-zA-Z0-9]+\/|-?[0-9]+|[a-zA-Z]{1,3}[0-9]+|[0-9]{1,3}[a-zA-Z]+/
+        @row[:model] << word.strip
+      elsif word =~ /[a-zA-Z]+|".+|.+"|[a-zA-Z]+-[a-zA-Z]+/
+        if @row[:manufacturer].frozen?
+          @row[:model] << word.strip
+        else
+          @row[:manufacturer] << word.strip
+        end
+      elsif word =~ /[0-9]+/ || (word =~ /[А-Я]+/ && index > 0)
+        break
+      else
+        @row[:name] << word.strip unless @row[:name].frozen?
+      end
+    end
+    @row
+  end
+
+  def self.check_existence row
+    temp = find_equipment_type(row["name"])
+    find_manufacturer(temp)
+    find_department(row["department_name"])
+  end
+
+  def self.find_equipment_type name
+    EquipmentTypeSync.all.each do |type_sync|
+      if name.include? type_sync.alias
+        name.gsub! type_sync.alias, ''
+        @row[:name] = [type_sync.equipment_type.name]
+        @row[:name].freeze
+        break
+      elsif name.include? type_sync.equipment_type.name
+        name.gsub! type_sync.equipment_type.name, ''
+        @row[:name] = [type_sync.equipment_type.name]
+        @row[:name].freeze
+        break
+      end
+    end
+    name
+  end
+
+  def self.find_manufacturer name
+    Manufacturer.all.each do |manufacturer|
+      if name.include? manufacturer.name
+        name.gsub! manufacturer.name, ''
+        @row[:manufacturer] = [manufacturer.name]
+        @row[:manufacturer].freeze
+        break
+      end
+    end
+    name
+  end
+
+  def self.find_department name
+    DepartmentSync.all.each do |department_sync|
+      if name.include? department_sync.alias
+        @row[:department] = [department_sync.department.name]
+        @row[:department].freeze
+        break
+      end
+    end
+    name
+  end
+
+  def self.write
+    book = Spreadsheet::Workbook.new
+    write_sheet = book.create_worksheet
+    @rows.each_with_index do |row, index|
+      write_sheet.row(index).replace row
+      #puts UnicodeUtils.downcase(type[0]), type[1]
+    end
+
+    format = Spreadsheet::Format.new :color=> :black, :pattern_fg_color => :yellow, :pattern => 1
+    (0..4).each { |i| write_sheet.row(0).set_format(i, format) }
+    book.write "public/test.xls"
+  end
+
+  def self.save_import
+    @rows.each_with_index do |row, index|
+      eq = {
+        department: Department.find_by_name(row[4]),
+        equipment_type: EquipmentType.find_by_name(row[0]),
+        inventory_number: row[3],
+        manufacturer: Manufacturer.find_by_name(row[1]) || Manufacturer.create(name: row[1]),
+        model: row[2],
+        writed_off: false
+      }
+      p eq
+      Equipment.create!(eq) if eq[:department] && eq[:equipment_type] && eq[:inventory_number] && index !=0
+    end
+  end
+
 end
