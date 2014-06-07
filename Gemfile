@@ -43,11 +43,15 @@ gem 'annotate'
 gem 'russian'
 gem 'roo'
 gem 'unicode'
+gem 'remotipart', '~> 1.2'
+#gem 'pace-rails'
+gem 'nprogress-rails'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'puma'
 end
 
 # Use ActiveModel has_secure_password

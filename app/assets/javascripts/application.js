@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap/dropdown
@@ -24,5 +25,10 @@
 //= require timeliner
 //= require jquery.mixitup.min
 //= require typeahead.jquery.min
-//= require pace.min
+//= require nprogress
+//= require nprogress-turbolinks
+// require pace.min
 //= require_tree .
+
+
+NProgress.start();

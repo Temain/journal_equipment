@@ -1,3 +1,7 @@
+$nprogress-color: #FF5C02;
+@import 'nprogress';
+@import 'nprogress-bootstrap';
+
 @import 'history';
 
 //.import {
@@ -106,6 +110,10 @@ body {
       .file-item {
         @extend .item;
         //margin-right: 20px;
+
+        .file-ext {
+          font-size: 1.4em;
+        }
       }
 
       .hidden-item {
@@ -119,5 +127,13 @@ body {
       }
     }
 
+  }
+
+  .progress {
+    background-image: none;
+  }
+
+  .progress.progress-striped.active {
+    display: none;
   }
 }

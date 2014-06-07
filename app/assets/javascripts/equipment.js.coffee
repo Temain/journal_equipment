@@ -1,6 +1,12 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+NProgress.configure
+  showSpinner: false
+  ease: 'ease'
+  speed: 700
+
+
 ready = ->
   $('#Container').mixItUp();
 

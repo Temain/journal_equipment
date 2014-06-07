@@ -32,13 +32,14 @@
         -#    %span.input-group-btn
         -#      = button_tag "Выбор файла", id: "upload_btn", class: "btn btn-primary", type: "button", name: nil
         -#    = file_field_tag 'import_file', accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-        = form_tag({ action: :upload }, html: { class: "form-horizontal" }, id: "import_form", multipart: true) do
-          = file_field_tag 'import_file', accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+        = form_tag(upload_path, id: "import_form", multipart: true, method: :post, remote: true, authenticity_token: true) do
+          = file_field_tag 'import_file', accept: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
           .actions
             .file-item
               = link_to 'javascript:;', id: "upload_lnk" do
                 = fa_icon "file 3x", class: "text-muted"
-                %div Выбрать файл
+                %div
+                  <span class="file-name">Выбрать файл</span><span class="file-ext"></span>
 
             .hidden-item.hidden-xs
 
@@ -46,3 +47,8 @@
               = link_to 'javascript:;', id: "import_lnk" do
                 = fa_icon "download 3x", class: "text-muted"
                 %div Загрузить
+
+    .row
+      .col-md-6.col-md-offset-3
+        .progress.progress-striped.active{ :id => "progress" }
+          %div.progress-bar{ :style => "width: 0%", :id => "bar" }

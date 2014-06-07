@@ -2,17 +2,19 @@ class ImportController < ApplicationController
   before_action :authenticate_user!
 
   def index
-
   end
 
   def upload
-    Equipment.import params[:import_file]
-    redirect_to :download
+    if request.xhr?
+      respond_to do |format|
+        @results = Equipment.import session, params[:import_file]
+        format.js
+      end
+    end
   end
 
   def download
     @file = open("public/test.xls")
     send_file(@file, :filename => "test.xls")
-   # render nothing: true
   end
 end

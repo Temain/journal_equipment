@@ -18,10 +18,14 @@
  *= require typeaheadjs
  *= require font-awesome
  *= require screen
- *= require pace-theme-minimal
+ *= require nprogress
+ *= require nprogress-bootstrap
+ * require pace-theme-minimal
  *= require_self
  *= require_tree .
  */
+
+
 
 @font-face {
     font-family: 'Glyphicons Halflings';

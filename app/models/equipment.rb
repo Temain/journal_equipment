@@ -19,7 +19,7 @@ class Equipment < ActiveRecord::Base
   belongs_to :manufacturer
   has_many   :journal_records
 
-  validates :model, presence: true
+  #validates :model, presence: true
   validates :inventory_number, presence: true, length: { maximum: 12 }
 
   validates :department, presence: true
@@ -61,7 +61,7 @@ class Equipment < ActiveRecord::Base
       @errors.add(:manufacturer, 'не может быть пустым') if manufacturer_id.nil?
     end
 
-  def self.import(file)
+  def self.import(session, file)
     spreadsheet = open_spreadsheet(file)
     spreadsheet.default_sheet = spreadsheet.sheets.first
     header = spreadsheet.row(1)
@@ -80,8 +80,8 @@ class Equipment < ActiveRecord::Base
       end
     end
 
-    save_import
-    write
+    #write
+    save_import(session)
   end
 
   def self.open_spreadsheet(file)
@@ -177,7 +177,8 @@ class Equipment < ActiveRecord::Base
     book.write "public/test.xls"
   end
 
-  def self.save_import
+  def self.save_import(session)
+    results = { imported: 0, not_imported: -1, updated: 0, not_updated: 0 } # not_imported -1 because first row is header
     @rows.each_with_index do |row, index|
       eq = {
         department: Department.find_by_name(row[4]),
@@ -187,9 +188,31 @@ class Equipment < ActiveRecord::Base
         model: row[2],
         writed_off: false
       }
-      p eq
-      Equipment.create!(eq) if eq[:department] && eq[:equipment_type] && eq[:inventory_number] && index !=0
+      finded = Equipment.find_by_inventory_number(row[3])
+      if finded
+        finded.assign_attributes(eq) if eq[:department] && eq[:equipment_type] && eq[:inventory_number] && index !=0
+        if finded.changed?
+          if finded.save
+            results[:updated] += 1
+          else
+            results[:not_updated] += 1
+          end
+        else
+          results[:not_updated] += 1
+        end
+      else
+        if eq[:department] && eq[:equipment_type] && eq[:inventory_number] && index !=0
+          if Equipment.create(eq)
+            results[:imported] += 1
+          else
+            results[:not_imported] += 1
+          end
+        else
+          results[:not_imported] += 1
+        end
+      end
     end
+    results
   end
 
 end
