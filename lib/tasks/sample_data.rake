@@ -1,6 +1,15 @@
 require 'bcrypt'
 
 namespace :db do
+  task create_user: :environment do
+
+    # Create users
+    User.create!(email:                 "cherepovskiy@evgeny.by",
+                 password:              "12345678",
+                 password_confirmation: "12345678")
+  end
+
+
   desc "Fill database with sample data"
   task populate: :environment do
 
