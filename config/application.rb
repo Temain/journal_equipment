@@ -28,7 +28,7 @@ module JournalEquipment
     #    html_tag.html_safe
     #  end
     #end
-
+    config.assets.initialize_on_precompile = false
     config.assets.precompile += ["fontawesome-webfont.ttf",
                                  "fontawesome-webfont.eot",
                                  "fontawesome-webfont.svg",
