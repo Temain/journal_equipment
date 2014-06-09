@@ -62,6 +62,20 @@ class Equipment < ActiveRecord::Base
     end
 
   def self.import(session, file)
+    format(file)
+    save_import(session)
+  end
+
+  def self.open_spreadsheet(file)
+    case File.extname(file.original_filename)
+      #when ".csv" then Csv.new(file.path, nil, :ignore)
+      when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
+      when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+      else raise "Unknown file type: #{file.original_filename}"
+    end
+  end
+
+  def self.format file
     spreadsheet = open_spreadsheet(file)
     spreadsheet.default_sheet = spreadsheet.sheets.first
     header = spreadsheet.row(1)
@@ -79,18 +93,7 @@ class Equipment < ActiveRecord::Base
         @rows << @row.values.map { |c| Unicode::capitalize(c.join(" ")) }
       end
     end
-
-    #write
-    save_import(session)
-  end
-
-  def self.open_spreadsheet(file)
-    case File.extname(file.original_filename)
-      #when ".csv" then Csv.new(file.path, nil, :ignore)
-      when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
-      when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
-      else raise "Unknown file type: #{file.original_filename}"
-    end
+    write @rows, "formated.xls"
   end
 
   def self.parse name
@@ -164,29 +167,30 @@ class Equipment < ActiveRecord::Base
     name
   end
 
-  def self.write
+  def self.write rows, file_name
     book = Spreadsheet::Workbook.new
     write_sheet = book.create_worksheet
-    @rows.each_with_index do |row, index|
+    rows.each_with_index do |row, index|
       write_sheet.row(index).replace row
       #puts UnicodeUtils.downcase(type[0]), type[1]
     end
 
     format = Spreadsheet::Format.new :color=> :black, :pattern_fg_color => :yellow, :pattern => 1
     (0..4).each { |i| write_sheet.row(0).set_format(i, format) }
-    book.write "public/test.xls"
+    book.write "public/#{file_name}"
   end
 
   def self.save_import(session)
     results = { imported: 0, not_imported: -1, updated: 0, not_updated: 0 } # not_imported -1 because first row is header
+    @not_imported_rows = []
     @rows.each_with_index do |row, index|
       eq = {
-        department: Department.find_by_name(row[4]),
         equipment_type: EquipmentType.find_by_name(row[0]),
-        inventory_number: row[3],
         manufacturer: Manufacturer.find_by_name(row[1]) || Manufacturer.create(name: row[1]),
         model: row[2],
-        writed_off: false
+        inventory_number: row[3],
+        department: Department.find_by_name(row[4])
+        #writed_off: false
       }
       finded = Equipment.find_by_inventory_number(row[3])
       if finded
@@ -206,12 +210,15 @@ class Equipment < ActiveRecord::Base
             results[:imported] += 1
           else
             results[:not_imported] += 1
+            @not_imported_rows << row
           end
         else
           results[:not_imported] += 1
+          @not_imported_rows << row
         end
       end
     end
+    write @not_imported_rows, "not_imported.xls"
     results
   end
 

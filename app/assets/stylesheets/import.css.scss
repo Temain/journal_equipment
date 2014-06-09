@@ -45,20 +45,16 @@ $nprogress-color: #FF5C02;
 //  }
 //}
 
-body {
-  //background-color: #2b3e50 !important;
-}
-
 .import {
-  background-color: #2b3e50;
-  max-height: 100%;
+  #background-color: #2b3e50;
+ /* max-height: 100%;
   max-width: 100%;
   margin-bottom: -20px;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0;*/
 
   .header {
     //border-bottom: 1px solid #FF6803;
@@ -127,6 +123,10 @@ body {
       }
     }
 
+  }
+
+  .file_name {
+    font-size: 1.3em;
   }
 
   .progress {

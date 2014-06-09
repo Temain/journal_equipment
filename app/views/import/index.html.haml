@@ -23,15 +23,6 @@
         %h1.title Импорт
     .row.content
       .col-md-12.col-xs-12
-        -#%h4 Последний импорт был произведен {дата} из файла {имя файла}, добавлено: {#####}, обновлено: {#####}
-        -#= form_tag({ action: :upload }, html: { class: "form-horizontal" }, multipart: true) do
-        -#  .input-group
-        -#    %span.input-group-addon.light
-        -#      %i.glyphicon.glyphicon-upload
-        -#    = text_field_tag :file_name, params[:file_name], class: "form-control", placeholder: "Файл не выбран..."
-        -#    %span.input-group-btn
-        -#      = button_tag "Выбор файла", id: "upload_btn", class: "btn btn-primary", type: "button", name: nil
-        -#    = file_field_tag 'import_file', accept: ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
         = form_tag(upload_path, id: "import_form", multipart: true, method: :post, remote: true, authenticity_token: true) do
           = file_field_tag 'import_file', accept: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
           .actions
@@ -47,6 +38,9 @@
               = link_to 'javascript:;', id: "import_lnk" do
                 = fa_icon "download 3x", class: "text-muted"
                 %div Загрузить
+
+    #result_modal_container
+    = render partial: 'format'
 
     .row
       .col-md-6.col-md-offset-3

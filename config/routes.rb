@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   get 'import' => 'import#index', as: 'import'
   post 'upload' => 'import#upload', as: 'upload'
-  get 'download' => 'import#download', as: 'download'
+  post 'format' => 'import#format', as: 'format'
+  get 'download/:file_name' => 'import#download', as: 'download'
 
   # returning JSON for typeaheads
   get 'load_manufacturers' => 'equipment#load_manufacturers', as: 'manufacturers'

@@ -2,7 +2,12 @@ ready = ->
   $real_field = $('#import_file')
 
   $real_field.change ->
+    $('#format_modal').modal(
+      backdrop: 'static',
+      keyboard: false
+    );
     file_name = $(@).val().replace(/^.*[\\\/]/, '')
+    $('.file_name').text file_name + "?"
     temp = file_name.split(".")
     file_name = temp[0]
     file_ext = "." + temp[1]
@@ -19,5 +24,14 @@ ready = ->
     if $real_field.val()
       NProgress.start()
       $('#import_form').submit()
+
+  $('#format_btn').click((e) ->
+    e.preventDefault()
+    if $real_field.val()
+      NProgress.start()
+      console.log($('#import_form'))
+      $('#import_form').attr('action', '/format')
+      $('#import_form').submit()
+  )
 
 $(document).ready(ready)
