@@ -21,11 +21,11 @@ ready = ->
   $('.actions > #relocation-link').popover();
   $('.actions > #history-link').popover();
   $('.actions > .actions-link').popover();
-  $('#create-link').popover();
+  $('#actions-link').popover();
   $('#profile-link').popover();
   $('#log-out-link').popover()
   $('#back-link').popover();
-  $('#import-link').popover();
+  $('#reports-link').popover();
 
   # scroll link
   $(".scroll-down").click ->

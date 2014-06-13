@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'format' => 'import#format', as: 'format'
   get 'download/:file_name' => 'import#download', as: 'download'
 
+  get 'reports/generate' => 'reports#generate', as: 'generate'
+
   # returning JSON for typeaheads
   get 'load_manufacturers' => 'equipment#load_manufacturers', as: 'manufacturers'
   get 'load_equipment' => 'equipment#load_equipment', as: 'load_equipment'
