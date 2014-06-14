@@ -81,8 +81,8 @@ class Equipment < ActiveRecord::Base
     header = spreadsheet.row(1)
     @rows = [["Тип", "Производитель", "Модель", "Инвентарный номер", "Подразделение"]]
 
-    #(2..spreadsheet.last_row).each do |i|
-    (2..20).each do |i|
+    (2..spreadsheet.last_row).each do |i|
+    #(2..20).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       if row["name"]
         @row = { name: [], manufacturer: [], model: [],
