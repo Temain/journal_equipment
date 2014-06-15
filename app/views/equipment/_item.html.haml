@@ -36,10 +36,13 @@
           %ul.dropdown-menu
             %div
               =fa_icon "user"
-              = "#{item.department.materially_responsible}"
+              = "#{item.department.chief}"
             %div
               =fa_icon "phone"
-              = "#{item.department.phone_number}"
+              - if item.department.phone_number
+                = "#{item.department.phone_number}"
+              - else
+                = "-"
 
     -#.created_at= "Добавлен: #{item.created_at.strftime("%d.%m.%Y")}"
     -#- if item.writed_off?

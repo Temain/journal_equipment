@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606020928) do
+ActiveRecord::Schema.define(version: 20140614223501) do
 
   create_table "categories", force: true do |t|
     t.string "name", null: false
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 20140606020928) do
     t.string  "name",                   null: false
     t.string  "materially_responsible"
     t.integer "phone_number"
+    t.string  "index"
+    t.string  "code"
+    t.string  "chief"
   end
 
   create_table "equipment", force: true do |t|

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'import' => 'import#index', as: 'import'
   post 'upload' => 'import#upload', as: 'upload'
   post 'format' => 'import#format', as: 'format'
+  get 'import/departments_index' => 'import#departments_index', as: 'import_departments_index'
+  post 'import/departments' => 'import#departments', as: 'import_departments'
   get 'download/:file_name' => 'import#download', as: 'download'
 
   get 'reports/generate' => 'reports#generate', as: 'generate'

@@ -27,4 +27,14 @@ class ImportController < ApplicationController
     @file = open("public/#{params[:file_name]}.xls")
     send_file(@file, :filename => "#{params[:file_name]}.xls")
   end
+
+  def departments_index
+    @dark_page = true
+  end
+
+  def departments
+    #Department.import File.open("public/departments.xls")
+    Department.import params[:import_file]
+    render text: "<h1>#{@count}</h1>".html_safe
+  end
 end
