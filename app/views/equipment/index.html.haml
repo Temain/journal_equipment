@@ -7,7 +7,7 @@
             = link_to "javascript:;", method: :get, class: "dropdown-toggle", data: { toggle: "dropdown" }, id: "actions-link", "data-content" => "Действия",
               "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
               = fa_icon "bars 2x", class: "text-muted"
-            %ul.dropdown-menu
+            %ul.dropdown-menu.dark
               %div
                 = link_to new_equipment_path, method: :get do
                   = fa_icon "plus-square", class: "text-muted"
@@ -20,7 +20,7 @@
             = link_to "javascript:;", id: "reports-link", class: "dropdown-toggle", data: { toggle: "dropdown" }, "data-content" => "Отчеты",
               "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
               = fa_icon "bar-chart-o 2x", class: "text-muted"
-            %ul.dropdown-menu
+            %ul.dropdown-menu.dark
               %li= link_to "По подраделению", "#"
               %li= link_to "По зап. части", "#"
               %li= link_to "По оборудованию", "#"
