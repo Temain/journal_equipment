@@ -27,6 +27,8 @@ class Equipment < ActiveRecord::Base
   #validates :manufacturer, presence: true
   #validate :when_manufacturer_empty
 
+  default_scope -> { order('updated_at DESC') }
+
   def full_name
     "#{equipment_type.name} #{ manufacturer.nil? ? "" : manufacturer.name } #{ model ? model : "" }"
   end
