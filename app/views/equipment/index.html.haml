@@ -37,7 +37,7 @@
               = fa_icon "power-off 2x", class: "text-muted"
         %div.user-name
           = fa_icon "user", class: "text-muted"
-          = current_user.email
+          = current_user.email.split("@")[0]
 
     .row
       .col-md-6.col-md-offset-3
