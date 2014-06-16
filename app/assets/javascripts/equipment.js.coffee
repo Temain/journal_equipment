@@ -220,3 +220,8 @@ $(document).scroll( ->
     $(".scroll-down").show("slow");
     $(".scroll-up").hide("slow");
 )
+
+$(document).on('DOMNodeInserted', (e) ->
+  if (e.target.id == 'nprogress')
+    $("#nprogress").css('z-index', 9999)
+)

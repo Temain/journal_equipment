@@ -58,6 +58,8 @@ group :development, :test do
   gem 'spring'
   gem 'puma'
   gem 'rvm'
+  #gem 'rails-erd'
+  gem 'railroady'
 end
 
 # Use ActiveModel has_secure_password
