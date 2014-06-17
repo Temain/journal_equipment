@@ -14,7 +14,7 @@ role :db,  %w{10.0.20.25}
 # This can be used to drop a more detailed server definition into the
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
-set :password, ask('Server password', nil)
+set :password, ask('Server password:', nil)
 server '10.0.20.25', user: 'jboss', roles: %w{web app}, :primary => true
 
 
