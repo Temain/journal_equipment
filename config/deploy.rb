@@ -5,7 +5,7 @@ SSHKit.config.command_map[:rake] = "bundle exec rake"
 lock '3.2.1'
 
 set :application, 'journal_equipment'
-set :repo_url, "git@github.com:temain/journal_equipment.git"
+set :repo_url, "https://github.com/Temain/journal_equipment.git"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
