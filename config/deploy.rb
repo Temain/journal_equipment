@@ -6,6 +6,7 @@ lock '3.2.1'
 
 set :application, 'journal_equipment'
 set :repo_url, "https://github.com/Temain/journal_equipment.git"
+set :default_stage, "production"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
