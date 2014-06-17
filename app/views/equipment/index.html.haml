@@ -21,15 +21,9 @@
               "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
               = fa_icon "bar-chart-o 2x", class: "text-muted"
             %ul.dropdown-menu.dark
-              %li= link_to "По подраделению", "#"
+              %li= link_to "По подразделению", "javascript:;", class: "text-muted", "data-toggle" => "modal", "data-target" => "#report_by_department_modal"
               %li= link_to "По зап. части", "#"
               %li= link_to "По оборудованию", "#"
-          -#.menu-item
-          -#  = link_to user_root_path, id: "profile-link", class: "dropdown-toggle", data: { toggle: "dropdown" }, "data-content" => "Профиль",
-          -#    "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
-          -#    = fa_icon "user 2x", class: "text-muted"
-          -#  %ul.dropdown-menu
-          -#    .portrait
 
           .menu-item
             = link_to destroy_user_session_path, method: :delete, id: "log-out-link", "data-content" => "Выйти",
@@ -51,14 +45,7 @@
             - @categories.each_with_index do |c, index|
               %li.nav-item
                 = button_tag c.name, class: "filter link", data: { filter: ".category-#{index}" }
-                -#.btn-group
-                -#  = button_tag class: "filter link", type: "button", data: { toggle: "dropdown" } do
-                -#    = c.name
-                -#    %span.caret
-                -#  %ul.dropdown-menu
-                -#    - c.equipment_types.each do |type|
-                -#      %li
-                -#        = link_to type.name, "#"
+
   .row.scroll-down
     .col-md-12
       = link_to 'javascript:;', id: "down" do
@@ -83,18 +70,11 @@
           %span.input-group-btn
             = submit_tag "Поиск", class: "btn btn-primary", name: nil
 
-      -# Dropdown categories
-      -#.btn-group
-      -#  =button_tag class: "btn btn-default dropdown-toggle", type: "button", data: { toggle: "dropdown" } do
-      -#    Dropdown
-      -#    -#%span.caret
-      -#  %ul.dropdown-menu
-      -#    %p ddfgdfg
-      -#    %p rterterter 2
-
       -#=button_tag "Filter", class: "filter", data: { filter: ".category-0" }
       = render partial: 'relocation'
       = render partial: 'repair'
+
+      = render partial: 'report_by_department'
 
       #Container
         =render partial: 'container'

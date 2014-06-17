@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
-#ruby="2.1.0p0"
-#ruby_gemset="diplom"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 # Use SCSS for stylesheets
@@ -43,7 +42,8 @@ gem 'unicode'
 gem 'remotipart', '~> 1.2'
 #gem 'pace-rails'
 gem 'nprogress-rails'
-gem 'thinreports'
+#gem 'thinreports'
+gem "jasper-rails"
 
 group :production do
   gem 'pg', '~> 0.17.1'
@@ -60,6 +60,10 @@ group :development, :test do
   gem 'rvm'
   #gem 'rails-erd'
   gem 'railroady'
+  gem 'capistrano',  '~> 3.1'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rails', '~> 1.1'
 end
 
 # Use ActiveModel has_secure_password

@@ -112,14 +112,19 @@ ready = ->
     equipment_type_id
   )
 
-  $('#datetimepicker').datetimepicker({
+  $('#report_by_department_modal').on('show.bs.modal',(e) ->
+    $('#end_date').val(formated_date(new Date()));
+    $('#start_date').val(moment().subtract('years', 1).format("DD.MM.YYYY"));
+  )
+
+  $('#datetimepicker, #start_date, #end_date').datetimepicker({
     language: 'ru',
     pickTime: false,
     startDate: new Date(2013, 2, 1),
     endDate: new Date(2013, 3, 30)
   });
 
-  $('#action_date').on('change', (ev) ->
+  $('#action_date, #start_date, #end_date').on('change', (ev) ->
     date = ev.currentTarget.value;
     unless moment(date, "DD.MM.YYYY", "ru").isValid()
       $(this).val(formated_date(new Date()));
@@ -130,9 +135,11 @@ ready = ->
     showToday: true,
     defaultDate: today
   }
+
   $('#action_date').focus( ->
     $('#datetimepicker').data("DateTimePicker").show();
   )
+
   formated_date = (date) ->
     day = date.getDate();
     month = date.getMonth() + 1;

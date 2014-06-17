@@ -59,6 +59,17 @@ class Equipment < ActiveRecord::Base
       end
     end
 
+    def self.search_by_department(department_id, start_date, end_date)
+      if department_id && start_date && end_date
+        joins(:equipment_type, :manufacturer, :department)
+        .where("departments.id = ? AND updated_at > ? AND updated_at < ?", "#{department_id}",
+               "#{Date.strptime(start_date, '%d.%m.%Y')}","#{Date.strptime(end_date, '%d.%m.%Y')}")
+        .includes(:manufacturer, :equipment_type, :department)
+      else
+        includes(:manufacturer, :equipment_type, :department)
+      end
+    end
+
     def when_manufacturer_empty
       @errors.add(:manufacturer, 'не может быть пустым') if manufacturer_id.nil?
     end
