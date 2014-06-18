@@ -40,10 +40,14 @@ class EquipmentController < ApplicationController
 
   def update
     @manufacturer = Manufacturer.find_or_create_by(name: params[:manufacturer][:name])
-    if !@manufacturer.name.empty? && @manufacturer.new_record?
-      @manufacturer.save
+    if !@manufacturer.name.empty?
+      if @manufacturer.new_record?
+        @manufacturer.save
+      end
+      @item.manufacturer = @manufacturer
+    else
+      @item.manufacturer = nil
     end
-    @item.manufacturer = @manufacturer
 
     if @item.update(equipment_params)
       flash[:notice] = "Изменения успешно сохранены."
@@ -131,6 +135,7 @@ class EquipmentController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Equipment.find(params[:id])
+      i = 0
     end
 
     def load_departments

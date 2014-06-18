@@ -15,7 +15,7 @@ role :db,  %w{10.0.20.25}
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 set :password, ask('Server password:', nil)
-server '10.0.20.25', user: 'jboss', roles: %w{web app}, :primary => true
+server '10.0.20.25', user: 'jboss', port: 22, password: fetch(:password), roles: %w{web app}, :primary => true
 
 
 # Custom SSH Options

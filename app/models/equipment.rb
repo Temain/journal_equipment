@@ -20,12 +20,14 @@ class Equipment < ActiveRecord::Base
   has_many   :journal_records
 
   #validates :model, presence: true
-  validates :inventory_number, presence: true, length: { maximum: 12 }
+  validates :inventory_number, presence: true, length: { maximum: 14 }
 
   validates :department, presence: true
   validates :equipment_type, presence: true
   #validates :manufacturer, presence: true
   #validate :when_manufacturer_empty
+
+  accepts_nested_attributes_for :manufacturer
 
   default_scope -> { order('updated_at DESC') }
 
@@ -61,18 +63,18 @@ class Equipment < ActiveRecord::Base
 
     def self.search_by_department(department_id, start_date, end_date)
       if department_id && start_date && end_date
-        joins(:equipment_type, :manufacturer, :department)
-        .where("departments.id = ? AND updated_at > ? AND updated_at < ?", "#{department_id}",
-               "#{Date.strptime(start_date, '%d.%m.%Y')}","#{Date.strptime(end_date, '%d.%m.%Y')}")
-        .includes(:manufacturer, :equipment_type, :department)
-      else
-        includes(:manufacturer, :equipment_type, :department)
+        joins(:equipment_type, :manufacturer, :department, :journal_records)
+        .where("departments.id = ? AND journal_records.action_date >= ? AND journal_records.action_date <= ? AND journal_records.journalable_type = ?", "#{department_id}",
+               "#{Date.strptime(start_date, '%d.%m.%Y') - 1.day}","#{Date.strptime(end_date, '%d.%m.%Y') + 1.day}", "Repair").reorder('equipment_types.name, manufacturers.name ASC')
+        .includes(:manufacturer, :equipment_type, :department, :journal_records)
+      #else
+      #  includes(:manufacturer, :equipment_type, :department) #.where(journal_records: { journalable_type: 'Repair' })
       end
     end
 
-    def when_manufacturer_empty
-      @errors.add(:manufacturer, 'не может быть пустым') if manufacturer_id.nil?
-    end
+    #def when_manufacturer_empty
+    #  @errors.add(:manufacturer, 'не может быть пустым') if manufacturer_id.nil?
+    #end
 
     def self.import(session, file)
       format(file)

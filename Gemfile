@@ -42,8 +42,8 @@ gem 'unicode'
 gem 'remotipart', '~> 1.2'
 #gem 'pace-rails'
 gem 'nprogress-rails'
-#gem 'thinreports'
-gem "jasper-rails"
+gem 'thinreports'
+#gem "jasper-rails"
 
 group :production do
   gem 'pg', '~> 0.17.1'

@@ -1,5 +1,6 @@
 class ImportController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_departments, only: [:index]
 
   def index
     @dark_page = true
@@ -36,5 +37,9 @@ class ImportController < ApplicationController
     #Department.import File.open("public/departments.xls")
     Department.import params[:import_file]
     render text: "<h1>#{@count}</h1>".html_safe
+  end
+
+  def load_departments
+    @departments = Department.all.map { |department| [department.name, department.id] }
   end
 end
