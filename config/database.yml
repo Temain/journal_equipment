@@ -26,11 +26,7 @@ test:
 
 production:
   adapter: postgresql
-  host: 10.0.20.15
-  username: admin
-  database: equipment
   port: 5432
-  password: 131182
   pool: 5
   timeout: 5000
 #  adapter: postgresql
