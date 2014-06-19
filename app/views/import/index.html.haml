@@ -22,7 +22,7 @@
               = fa_icon "bar-chart-o 2x", class: "text-muted"
             %ul.dropdown-menu.dark
               %li= link_to "По подразделению", "javascript:;", class: "text-muted", "data-toggle" => "modal", "data-target" => "#report_by_department_modal"
-              %li= link_to "По зап. части", "#"
+              %li= link_to "По зап. части", "javascript:;", class: "text-muted", "data-toggle" => "modal", "data-target" => "#report_by_spare_modal"
               %li= link_to "По оборудованию", "#"
 
           .menu-item
@@ -69,3 +69,4 @@
           %div.progress-bar{ :style => "width: 0%", :id => "bar" }
 
   = render partial: 'equipment/report_by_department'
+  = render partial: 'equipment/report_by_spare'

@@ -22,7 +22,7 @@
               = fa_icon "bar-chart-o 2x", class: "text-muted"
             %ul.dropdown-menu.light
               %li= link_to "По подразделению", "javascript:;", class: "text-muted", "data-toggle" => "modal", "data-target" => "#report_by_department_modal"
-              %li= link_to "По зап. части", "#"
+              %li= link_to "По зап. части", "javascript:;", class: "text-muted", "data-toggle" => "modal", "data-target" => "#report_by_spare_modal"
               %li= link_to "По оборудованию", "#"
           -#.menu-item
           -#  = link_to user_root_path, id: "profile-link", class: "dropdown-toggle", data: { toggle: "dropdown" }, "data-content" => "Профиль",
@@ -90,3 +90,4 @@
                 Сохранить
 
   = render partial: 'report_by_department'
+  = render partial: 'report_by_spare'
