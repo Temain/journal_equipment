@@ -22,9 +22,9 @@ class ReportsController < ApplicationController
 
     end
 
-    send_data report.generate, :filename    => 'report_by_department.pdf',
-                               :type        => 'application/pdf',
-                               :disposition => 'attachment'
+    send_data report.generate, filename:    'report_by_department.pdf',
+                               type:        'application/pdf',
+                               disposition: 'attachment'
   end
 
   def report_by_spare
@@ -47,10 +47,42 @@ class ReportsController < ApplicationController
         end
       end
 
-      send_data report.generate, :filename    => 'report_by_spare.pdf',
-                :type        => 'application/pdf',
-                :disposition => 'attachment'
+      send_data report.generate, filename:    'report_by_spare.pdf',
+                                 type:        'application/pdf',
+                                 disposition: 'attachment'
     end
   end
+
+  def report_by_equipment
+    install_fonts
+    @equipment = Equipment.find(params[:equipment_id])
+
+    report = ThinReports::Report.create layout: File.join(Rails.root, 'app', 'reports', 'report_by_equipment.tlf') do |r|
+      r.start_new_page do |page|
+        page.values equipment: "#{@equipment.full_name}",
+                    department: "#{@equipment.department.name}",
+                    chief: "Руководитель:  #{@equipment.department.chief}",
+                    mat: "Материально ответственный:  #{@equipment.department.materially_responsible}",
+                    phone_number: "Номер телефона:  #{@equipment.department.phone_number}"
+
+        #@spare.repairs.each_with_index do |repair, index|
+        #  page.list(:list).add_row do |row|
+        #    row.values
+        #  end
+        #
+        #end
+      end
+    end
+
+    send_data report.generate, filename:    'report_by_equipment.pdf',
+                               type:        'application/pdf',
+                               disposition: 'attachment'
+  end
+
+  private
+
+    def install_fonts
+      puts ThinReports::ROOTDIR
+    end
 
 end

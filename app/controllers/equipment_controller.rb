@@ -137,18 +137,6 @@ class EquipmentController < ApplicationController
       @item = Equipment.find(params[:id])
     end
 
-    def load_departments
-      @departments = Department.all.map { |department| [department.name, department.id] }
-    end
-
-    #def load_spares_array
-    #  @spares = EquipmentType.includes(:spares).map { |type| [ type.name, type.spares.map { |spare| [spare.name, id: spare.id] }]}
-    #end
-
-    def load_equipment_types
-      @equipment_types = EquipmentType.all.map { |type| [type.name, type.id] }
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def equipment_params
       params.require(:equipment).permit(:model, :inventory_number, :equipment_type_id, :department_id)

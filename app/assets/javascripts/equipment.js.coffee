@@ -20,12 +20,15 @@ ready = ->
   $('.actions > #repair-link').popover();
   $('.actions > #relocation-link').popover();
   $('.actions > #history-link').popover();
+  $('.actions > #pdf-link').popover();
   $('.actions > .actions-link').popover();
+
   $('#actions-link').popover();
   $('#profile-link').popover();
   $('#log-out-link').popover()
   $('#back-link').popover();
   $('#reports-link').popover();
+  $('pdf-link').popover();
 
   # scroll link
   $(".scroll-down").click ->

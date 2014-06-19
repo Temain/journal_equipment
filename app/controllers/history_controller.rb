@@ -15,11 +15,4 @@ class HistoryController < ApplicationController
       @item = Equipment.find(params[:id])
     end
 
-    def load_departments
-      @departments = Department.all.map { |department| [department.name, department.id] }
-    end
-
-    def load_equipment_types
-      @equipment_types = EquipmentType.all.map { |type| [type.name, type.id] }
-    end
 end

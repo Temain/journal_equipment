@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   post 'reports/report_by_department' => 'reports#report_by_department', as: 'report_by_department'
   post 'reports/report_by_spare' => 'reports#report_by_spare', as: 'report_by_spare'
+  get 'reports/report_by_equipment/:equipment_id' => 'reports#report_by_equipment', as: 'report_by_equipment'
 
   # returning JSON for typeaheads
   get 'load_manufacturers' => 'equipment#load_manufacturers', as: 'manufacturers'

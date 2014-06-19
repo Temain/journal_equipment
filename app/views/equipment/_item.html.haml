@@ -16,6 +16,10 @@
       "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
       = fa_icon "exchange", class: "text-muted", "data-toggle" => "modal", "data-target" => "#relocation_modal", id: item.id
 
+    = link_to report_by_equipment_path(item.id), method: :get, id: "pdf-link", "data-content" => "Экспорт в pdf",
+      "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover", target: '_self' do
+      = fa_icon "file", class: "text-muted"
+
     = link_to history_path(item.id), method: :get, id: "history-link", "data-content" => "История",
       "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
       = fa_icon "clock-o", class: "text-muted"
