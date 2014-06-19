@@ -10,4 +10,8 @@ module ApplicationHelper
     end
   end
 
+  def local_phone_number number
+    number.to_s.chars.insert(1, "-").join
+  end
+
 end

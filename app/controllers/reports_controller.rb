@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
+  include ApplicationHelper
 
   def report_by_department
     @equipment = Equipment.search_by_department(params[:department_id].first, params[:start_date], params[:end_date])
@@ -53,7 +54,6 @@ class ReportsController < ApplicationController
   end
 
   def report_by_equipment
-    install_fonts
     @equipment = Equipment.find(params[:equipment_id])
 
     report = ThinReports::Report.create layout: File.join(Rails.root, 'app', 'reports', 'report_by_equipment.tlf') do |r|
@@ -62,7 +62,7 @@ class ReportsController < ApplicationController
                     department: "#{@equipment.department.name}",
                     chief: "Руководитель:  #{@equipment.department.chief}",
                     mat: "Материально ответственный:  #{@equipment.department.materially_responsible}",
-                    phone_number: "Номер телефона:  #{@equipment.department.phone_number}"
+                    phone_number: "Номер телефона:  #{ local_phone_number @equipment.department.phone_number }"
 
         @equipment.journal_records.each do |record|
           event = record.journalable
@@ -80,11 +80,5 @@ class ReportsController < ApplicationController
                                type:        'application/pdf',
                                disposition: 'attachment'
   end
-
-  private
-
-    def install_fonts
-      puts ThinReports::ROOTDIR
-    end
 
 end

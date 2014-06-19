@@ -44,7 +44,7 @@
             %div
               =fa_icon "phone"
               - if item.department.phone_number
-                = "#{item.department.phone_number}"
+                = "#{local_phone_number item.department.phone_number}"
               - else
                 = "-"
 
