@@ -26,12 +26,20 @@ test:
 
 production:
   adapter: postgresql
-  host: ec2-54-197-241-78.compute-1.amazonaws.com
-  username: hdashrvhyuakot
-  database: dcfch83hfr0jfj
+  host: 10.0.20.15
+  username: admin
+  database: equipment
   port: 5432
-  password: Ku8TrPou9QRgoPy1K7Yp8FxgnV
+  password: 131182
   pool: 5
   timeout: 5000
+#  adapter: postgresql
+#  host: ec2-54-197-241-78.compute-1.amazonaws.com
+#  username: hdashrvhyuakot
+#  database: dcfch83hfr0jfj
+#  port: 5432
+#  password: Ku8TrPou9QRgoPy1K7Yp8FxgnV
+#  pool: 5
+#  timeout: 5000
 
 

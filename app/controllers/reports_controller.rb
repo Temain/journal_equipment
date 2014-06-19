@@ -11,7 +11,6 @@ class ReportsController < ApplicationController
                  end_date: params[:end_date]
 
         @equipment.each_with_index do |eq, index|
-          puts eq.inventory_number
           page.list(:list).add_row do |row|
             row.values number: "#{index + 1}.",
                        equipment: eq.full_name,
@@ -29,6 +28,29 @@ class ReportsController < ApplicationController
   end
 
   def report_by_spare
+    @spare = Spare.find_by_name(params[:spare])
+    if @spare
+      report = ThinReports::Report.create layout: File.join(Rails.root, 'app', 'reports', 'report_by_spare.tlf') do |r|
+        r.start_new_page do |page|
+          page.values title: "Список оборудования с замененной деталью #{ @spare.name }"
+
+          @spare.repairs.each_with_index do |repair, index|
+            page.list(:list).add_row do |row|
+              row.values number: "#{index + 1}.",
+                         equipment: repair.journal_record.equipment.full_name,
+                         department: repair.journal_record.equipment.department.name,
+                         inventory_number: repair.journal_record.equipment.inventory_number,
+                         date: repair.journal_record.action_date.strftime('%d.%m.%Y')
+            end
+
+          end
+        end
+      end
+
+      send_data report.generate, :filename    => 'report_by_spare.pdf',
+                :type        => 'application/pdf',
+                :disposition => 'attachment'
+    end
   end
 
 end

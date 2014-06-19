@@ -45,6 +45,25 @@ ready = ->
     $(".scroll-up").css("display", "none");
 
 
+  # Report by spare modal
+  spares = new Bloodhound
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      remote: "/load_spares/#{ $('#report_by_spare_modal #equipment_type_id_').val() }?q=%QUERY"
+
+  spares.initialize();
+
+  $('#report_by_spare_modal #equipment_type_id_').on('change', () ->
+    spares.remote.url = "/load_spares/#{ $('#report_by_spare_modal #equipment_type_id_').val() }?q=%QUERY"
+  )
+
+  $('#spare').typeahead(null, {
+    name: 'spares',
+    displayKey: 'name',
+    source: spares.ttAdapter()
+  });
+
+
   # manufacturers typeahead
   manufacturers =
     new Bloodhound

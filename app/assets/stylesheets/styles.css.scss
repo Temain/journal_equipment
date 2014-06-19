@@ -210,6 +210,13 @@ body {
   background-image: none;
 }
 
+#report_by_spare_modal {
+  span.twitter-typeahead {
+    width: 100%;
+  }
+}
+
+
 /* -------- icon in input field --------- */
 .left-inner-addon {
   position: relative;

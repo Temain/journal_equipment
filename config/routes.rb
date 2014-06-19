@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'download/:file_name' => 'import#download', as: 'download'
 
   post 'reports/report_by_department' => 'reports#report_by_department', as: 'report_by_department'
+  post 'reports/report_by_spare' => 'reports#report_by_spare', as: 'report_by_spare'
 
   # returning JSON for typeaheads
   get 'load_manufacturers' => 'equipment#load_manufacturers', as: 'manufacturers'

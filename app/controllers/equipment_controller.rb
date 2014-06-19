@@ -2,7 +2,7 @@ class EquipmentController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item,  only: [:edit, :update, :destroy, :repair, :relocation]
   before_action :load_departments, only: [:index, :new, :edit, :create, :update, :relocation]
-  before_action :load_equipment_types, only: [:new, :edit, :create, :update]
+  before_action :load_equipment_types, only: [:index, :new, :edit, :create, :update]
 
   def index
     @equipment = Equipment.search(params[:search]).page params[:page]
@@ -135,7 +135,6 @@ class EquipmentController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Equipment.find(params[:id])
-      i = 0
     end
 
     def load_departments
