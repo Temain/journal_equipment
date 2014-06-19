@@ -23,7 +23,6 @@
             %ul.dropdown-menu.dark
               %li= link_to "По подразделению", "javascript:;", class: "text-muted", "data-toggle" => "modal", "data-target" => "#report_by_department_modal"
               %li= link_to "По зап. части", "javascript:;", class: "text-muted", "data-toggle" => "modal", "data-target" => "#report_by_spare_modal"
-              %li= link_to "По оборудованию", "#"
 
           .menu-item
             = link_to destroy_user_session_path, method: :delete, id: "log-out-link", "data-content" => "Выйти",

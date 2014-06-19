@@ -18,11 +18,11 @@
 
     = link_to report_by_equipment_path(item.id), method: :get, id: "pdf-link", "data-content" => "Экспорт в pdf",
       "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover", target: '_self' do
-      = fa_icon "file", class: "text-muted"
+      = fa_icon "file-pdf-o", class: "text-muted"
 
     = link_to history_path(item.id), method: :get, id: "history-link", "data-content" => "История",
       "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
-      = fa_icon "clock-o", class: "text-muted"
+      = fa_icon "history", class: "text-muted"
 
     = link_to 'javascript:;', class: "actions-link", id: item.id, "data-content" => "Действия",
       "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do

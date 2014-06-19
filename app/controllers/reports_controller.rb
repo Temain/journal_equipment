@@ -7,15 +7,14 @@ class ReportsController < ApplicationController
     report = ThinReports::Report.create layout: File.join(Rails.root, 'app', 'reports', 'report_by_department.tlf') do |r|
       r.start_new_page do |page|
         page.values department: Department.find(params[:department_id]).first.name,
-                 start_date: params[:start_date],
-                 end_date: params[:end_date]
+                 date: "с #{params[:start_date]}г. по #{params[:end_date]}г."
 
         @equipment.each_with_index do |eq, index|
           page.list(:list).add_row do |row|
             row.values number: "#{index + 1}.",
                        equipment: eq.full_name,
                        inventory_number: eq.inventory_number,
-                       action_date: eq.journal_records.where(journalable_type: 'Repair').last.action_date.strftime('%d.%m.%Y')
+                       action_date: "#{eq.journal_records.where(journalable_type: 'Repair').last.action_date.strftime('%d.%m.%Y')}г."
           end
         end
       end
@@ -40,7 +39,7 @@ class ReportsController < ApplicationController
                          equipment: repair.journal_record.equipment.full_name,
                          department: repair.journal_record.equipment.department.name,
                          inventory_number: repair.journal_record.equipment.inventory_number,
-                         date: repair.journal_record.action_date.strftime('%d.%m.%Y')
+                         date: "#{repair.journal_record.action_date.strftime('%d.%m.%Y')}г."
             end
 
           end
@@ -65,12 +64,15 @@ class ReportsController < ApplicationController
                     mat: "Материально ответственный:  #{@equipment.department.materially_responsible}",
                     phone_number: "Номер телефона:  #{@equipment.department.phone_number}"
 
-        #@spare.repairs.each_with_index do |repair, index|
-        #  page.list(:list).add_row do |row|
-        #    row.values
-        #  end
-        #
-        #end
+        @equipment.journal_records.each do |record|
+          event = record.journalable
+          page.list(:list).add_row do |row|
+            row.values event_date: "#{record.action_date.strftime('%d.%m.%Y')}г.",
+                       event: event.instance_of?(Repair) ? event.reason : "Перемещен из подразделения \"#{event.old_department.name}\"
+                                                                     в подразделение \"#{event.new_department.name}\""
+          end
+
+        end
       end
     end
 
