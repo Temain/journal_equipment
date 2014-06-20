@@ -4,7 +4,8 @@ namespace :db do
   task create_user: :environment do
 
     # Create users
-    User.create!(email:                 "temain@mail.ru",
+    User.create!(username:              "temain",
+                 email:                 "temain@mail.ru",
                  password:              "12345678",
                  password_confirmation: "12345678")
   end

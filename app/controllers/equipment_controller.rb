@@ -1,6 +1,6 @@
 class EquipmentController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item,  only: [:edit, :update, :destroy, :repair, :relocation]
+  before_action :set_item,  only: [:edit, :update, :destroy, :repair, :relocation, :write_off]
   before_action :load_departments, only: [:index, :new, :edit, :create, :update, :relocation]
   before_action :load_equipment_types, only: [:index, :new, :edit, :create, :update]
 
@@ -57,7 +57,22 @@ class EquipmentController < ApplicationController
     end
   end
 
+  def write_off
+    if request.xhr?
+      respond_to do |format|
+        format.js { render "write_off" }
+      end
+    end
+  end
+
   def destroy
+    @item.writed_off = true
+    if @item.save
+      flash[:notice] = "#{@item.full_name} успешно списан."
+    else
+      flash[:danger] = "Извините, произошла ошибка."
+    end
+    redirect_to action: :index
   end
 
   def repair

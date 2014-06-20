@@ -69,19 +69,15 @@
           %span.input-group-btn
             = submit_tag "Поиск", class: "btn btn-primary", name: nil
 
-      -#=button_tag "Filter", class: "filter", data: { filter: ".category-0" }
-      = render partial: 'relocation'
-      = render partial: 'repair'
-
-      = render partial: 'report_by_department'
-      = render partial: 'report_by_spare'
-
       #Container
         =render partial: 'container'
 
   .page-buffer
   %footer.row
     .col-xs-12.col-md-12
-      -#%p © 2014 ФГБОУ ВПО «Кубанский государственный аграрный университет»
+      #write_off_modal
+      = render partial: 'relocation'
+      = render partial: 'repair'
 
-
+      = render partial: 'report_by_department'
+      = render partial: 'report_by_spare'

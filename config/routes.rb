@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'history/:id' => 'history#show', as: 'history'
   post 'equipment/:id/relocation' => 'equipment#relocation', as: 'relocation'
   post 'equipment/:id/repair' => 'equipment#repair', as: 'repair'
+  get 'equipment/:id/write_off' => 'equipment#write_off', as: 'write_off'
+  delete 'equipment/:id' => 'equipment#destroy', as: 'destroy_equipment'
 
   get 'import' => 'import#index', as: 'import'
   post 'upload' => 'import#upload', as: 'upload'

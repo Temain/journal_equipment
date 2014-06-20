@@ -4,7 +4,7 @@
       "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
       = fa_icon "pencil", class: "text-muted"
 
-    = link_to equipment_path(item.id), method: :delete, id: "write-off-link", "data-content" => "Списать",
+    = link_to write_off_path(item.id), remote: true, id: "write-off-link", "data-content" => "Списать",
       "rel" => "popover", "data-placement" => "bottom", "data-trigger" => "hover" do
       = fa_icon "trash-o", class: "text-muted"
 

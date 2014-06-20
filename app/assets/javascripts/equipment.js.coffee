@@ -121,6 +121,13 @@ ready = ->
     $('#new_department_id_').val(null);
   )
 
+  # get writed_off modal invoker
+  $('#writed_off_modal').on('show.bs.modal',(e) ->
+    invoker = $(e.relatedTarget);
+    item_id = invoker[0].attributes.id.value;
+    $('#relocation_modal form').attr('action', '/equipment/'+ item_id);
+  )
+
   # get repair modal invoker
   equipment_type_id = $('#repair_modal').on('show.bs.modal',(e) ->
     $("#spares").select2('data', null); # clear selection
