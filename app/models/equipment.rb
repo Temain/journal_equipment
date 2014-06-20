@@ -49,6 +49,7 @@ class Equipment < ActiveRecord::Base
       else
         includes(:manufacturer, :equipment_type, :department)
       end
+      .where(writed_off: false)
     end
 
     def self.search_for_create(search)
@@ -66,6 +67,7 @@ class Equipment < ActiveRecord::Base
         joins(:equipment_type, :manufacturer, :department, :journal_records)
         .where("departments.id = ? AND journal_records.action_date >= ? AND journal_records.action_date <= ? AND journal_records.journalable_type = ?", "#{department_id}",
                "#{Date.strptime(start_date, '%d.%m.%Y') - 1.day}","#{Date.strptime(end_date, '%d.%m.%Y') + 1.day}", "Repair").reorder('equipment_types.name, manufacturers.name ASC')
+        .where(writed_off: false)
         .includes(:manufacturer, :equipment_type, :department, :journal_records)
       #else
       #  includes(:manufacturer, :equipment_type, :department) #.where(journal_records: { journalable_type: 'Repair' })
